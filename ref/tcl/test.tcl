@@ -1,0 +1,49 @@
+## Primetime can be used for Post Synthesis and Post APR timign verification
+## set "$MYDESIGN" to your module name
+
+set MYDESIGN conv_pool
+set sh_enable_page_mode true
+set search_path {.  }
+set power_enable_analysis true
+set link_library "* asap7sc7p5t_22b_AO_RVT_TT_170906 asap7sc7p5t_22b_INVBUF_RVT_TT_170906 asap7sc7p5t_22b_OA_RVT_TT_170906 asap7sc7p5t_22b_SEQ_RVT_TT_170906 asap7sc7p5t_22b_SIMPLE_RVT_TT_170906"
+read_lib "/afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_AO_RVT_TT.lib"
+read_lib "/afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_INVBUF_RVT_TT.lib"
+read_lib "/afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_OA_RVT_TT.lib"
+read_lib "/afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_SEQ_RVT_TT.lib"
+read_lib "/afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_SIMPLE_RVT_TT.lib"
+set link_path {* asap7sc7p5t_22b_AO_RVT_TT_170906 asap7sc7p5t_22b_INVBUF_RVT_TT_170906 asap7sc7p5t_22b_OA_RVT_TT_170906 asap7sc7p5t_22b_SEQ_RVT_TT_170906 asap7sc7p5t_22b_SIMPLE_RVT_TT_170906}
+
+# Post-Encounter: use *.v output from Encounter
+read_verilog -hdl_compiler {../conv_pool.apr.v}
+link_design $MYDESIGN
+set power_enable_analysis true
+
+# Post-Encounter: use *.spef generated from Encounter
+read_parasitics "../conv_pool.spef"
+read_sdc "../conv_pool.281.syn.sdc"
+read_vcd "../convpool_output.vcd" -strip_path tb/dut
+# In your testbench simulation, the top-level module that you designed is instantiated
+# In the vcd related line above,
+# "testbench1" refers to your testbench module name
+# "dut" (design under test) refers to the instance name of your top-level module instantiated in your testbench verilog file 
+# Then, testbench1/dut points to your top-level module.
+
+check_timing -significant_digits 6
+update_power
+update_timing
+
+set_operating_conditions -library "asap7sc7p5t_22b_AO_RVT_TT_170906 asap7sc7p5t_22b_INVBUF_RVT_TT_170906 asap7sc7p5t_22b_OA_RVT_TT_170906 asap7sc7p5t_22b_SEQ_RVT_TT_170906 asap7sc7p5t_22b_SIMPLE_RVT_TT_170906" -analysis_type single
+
+# report the worst-case delay path
+report_timing -delay_type max -max_paths 1000 > delay_worst
+# report the best-case delay path
+report_timing -delay_type min -max_paths 1000 > delay_best
+# For timing paths with slack less than 10ns, report top-10 worst delay paths
+report_timing -slack_lesser_than 1000 -max_paths 3 -delay_type max -significant_digits 6 > delay_max
+# For timing paths with slack less than 10ns, report top-10 best delay paths
+report_timing -slack_lesser_than 1000 -max_paths 3 -delay_type min -significant_digits 6 > delay_min
+
+get_switching_activity [get_nets *] > output_$MYDESIGN.txt
+report_power > power_$MYDESIGN.rpt
+
+# exit

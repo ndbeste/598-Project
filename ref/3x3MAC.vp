@@ -1,0 +1,43 @@
+module array_split (
+	input	logic		clk,
+	input	logic		rst,
+	input	logic[71:0]	kernel,
+	input	logic[127:0]	image,
+	output	logic[7:0]	conv_out[1:0][1:0]
+);
+
+logic[7:0] kernel[2:0][2:0];
+logic[7:0] pixel [3:0][3:0];
+
+assign kernel[1][1] = kernel[7 :0 ];
+assign kernel[1][2] = kernel[15:8 ];
+assign kernel[1][3] = kernel[23:16];
+assign kernel[2][1] = kernel[31:24];
+assign kernel[2][2] = kernel[39:32];
+assign kernel[2][3] = kernel[47:40];
+assign kernel[3][1] = kernel[55:48];
+assign kernel[3][2] = kernel[63:56];
+assign kernel[3][3] = kernel[71:64];
+
+assign pixel[1][1] = image[7  :0  ];
+assign pixel[1][2] = image[15 :8  ];
+assign pixel[1][3] = image[23 :16 ];
+assign pixel[1][4] = image[31 :24 ];
+assign pixel[2][1] = image[39 :32 ];
+assign pixel[2][2] = image[47 :40 ];
+assign pixel[2][3] = image[55 :48 ];
+assign pixel[2][4] = image[63 :56 ];
+assign pixel[3][1] = image[71 :64 ];
+assign pixel[3][2] = image[79 :72 ];
+assign pixel[3][3] = image[87 :80 ];
+assign pixel[3][4] = image[95 :88 ];
+assign pixel[4][1] = image[103:96 ];
+assign pixel[4][2] = image[111:104];
+assign pixel[4][3] = image[119:112];
+assign pixel[4][4] = image[127:120];
+
+
+
+
+
+endmodule
