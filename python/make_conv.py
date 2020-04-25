@@ -47,7 +47,7 @@ f.write("    output logic           fmaps_out         [0:19][0:11][0:11]\n")
 f.write("    );\n")
 
 for i in range(20):
-    f.write("pool2_1 p_1_%s (.pool_in(fmaps_in[%s]), .conv_out(fmaps_out[%s]));\n"%(i,i,i))
+    f.write("poolchan1 p_1_%s (.pool_in(fmaps_in[%s]), .pool_out(fmaps_out[%s]));\n"%(i,i,i))
 
 f.write("endmodule")
 f.close()
@@ -88,4 +88,19 @@ for ox in range(24):
             f.write("assign conv_one_out[%s][%s][%s] = (sum_out[%s][%s][%s] >= 5'b01010) ? 1'b1: 1'b0;\n"%(c,ox,oy,c,ox,oy))
 
 f.write("\nendmodule")
+f.close()
+
+##################################################################################################
+
+f = open("pool2.sv", "w")
+
+f.write("module pool2(\n")
+f.write("    input  logic           fmaps_in          [0:19][0:23][0:23],\n")
+f.write("    output logic           fmaps_out         [0:19][0:11][0:11]\n")
+f.write("    );\n")
+
+for i in range(20):
+    f.write("poolchan2 p_2_%s (.pool_in(fmaps_in[%s]), .pool_out(fmaps_out[%s]));\n"%(i,i,i))
+
+f.write("endmodule")
 f.close()
