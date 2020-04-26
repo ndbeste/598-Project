@@ -1,10 +1,10 @@
 module conv2
     #( parameter bW = 8 )
     (
-    input  logic           pool_one_out              [0:  17][0:11][0:11],
-    input  logic           kernels                   [0:1079][0: 4][0: 4],
-    input  logic [bW-1:0]  kernel_offset             [0:  59],
-    output logic           conv_two_out              [0:  59][0: 7][0: 7]
+    input  logic            image          [0:  17][0:11][0:11],
+    input  logic            kernels        [0:1079][0: 4][0: 4],
+    input  logic  [bW-1:0]  kernel_offset  [0:  59],
+    output logic            conv_two_out   [0:  59][0: 7][0: 7]
     );
 
 logic       xor_out [0:1079][0:23][0:23];
