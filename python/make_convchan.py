@@ -25,7 +25,7 @@ for image_x in range(fmap_dim):
         conv_string += ";\n"
         f.write(conv_string)
 
-f.write("\nendmodle")
+f.write("\nendmodule")
 f.close()
 
 ##############################################################################################
