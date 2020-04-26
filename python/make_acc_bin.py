@@ -24,7 +24,7 @@ f.write("\n")
 # Compare sum_out with kernel_offset. conv_one_out = (sum_out > kernel_offset) ? 1'b1 : 1'b0;
 for ox in range(24):
     for oy in range(24):
-        f.write("assign accbin_out[%s][%s] = (sum_out > kernel_offset) ? 1'b1 : 1'b0;\n"%(ox,oy))
+        f.write("assign accbin_out[%s][%s] = (sum_out[%s][%s] > kernel_offset) ? 1'b1 : 1'b0;\n"%(ox,oy,ox,oy))
 
 f.write("\nendmodule")
 f.close()
@@ -48,7 +48,7 @@ for ox in range(12):
         f.write("assign sum_out[%s][%s] = "%(ox,oy))
         for c in range(18):
             f.write("accbin_in[%s][%s][%s]"%(c,ox,oy))
-            if c != 4:
+            if c != 18:
                 f.write(" + ")
         f.write(";\n")
 
@@ -56,7 +56,7 @@ f.write("\n")
 
 for ox in range(12):
     for oy in range(12):
-        f.write("assign accbin_out[%s][%s] = (sum_out > kernel_offset) ? 1'b1 : 1'b0;\n"%(ox,oy))
+        f.write("assign accbin_out[%s][%s] = (sum_out[%s][%s] > kernel_offset) ? 1'b1 : 1'b0;\n"%(ox,oy,ox,oy))
 
 f.write("\nendmodule")
 f.close()
