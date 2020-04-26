@@ -1,4 +1,6 @@
 module poolchan1 (
+    input  logic clk,
+    input  logic rst_n,
     input  logic pool_in [0:24][0:24],
     output logic pool_out[0:12][0:12]
 );

@@ -5,6 +5,9 @@ o_dim = int(i_dim/p_dim) # output dimention
 f = open('poolchan1.sv','w')
 
 f.write("module poolchan1 (\n")
+# make clk/ rst
+f.write("    input  logic clk,\n")
+f.write("    input  logic rst_n,\n")
 f.write("    input  logic pool_in [0:24][0:24],\n")
 f.write("    output logic pool_out[0:12][0:12]\n")
 f.write(");\n\n")
@@ -57,6 +60,8 @@ o_dim = int(i_dim/p_dim) # output dimention
 f = open('poolchan2.sv','w')
 
 f.write("module poolchan2 (\n");
+f.write("    input  logic clk,\n")
+f.write("    input  logic rst_n,\n")
 f.write("    input  logic pool_in [0:7][0:7],\n");
 f.write("    output logic pool_out[0:3][0:3]\n");
 f.write(");\n\n");
