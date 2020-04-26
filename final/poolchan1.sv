@@ -1,8 +1,8 @@
 module poolchan1 (
     input  logic clk,
     input  logic rst_n,
-    input  logic pool_in [0:24][0:24],
-    output logic pool_out[0:12][0:12]
+    input  logic pool_in [0:23][0:23],
+    output logic pool_out[0:11][0:11]
 );
 
 always_ff @(posedge clk) begin

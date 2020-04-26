@@ -14,7 +14,7 @@ f.write("module convchan1 \n\
 
 for image_x in range(fmap_dim):
     for image_y in range(fmap_dim):
-        conv_string = "assign xor_sum[%s][%s] = "%(image_x, image_y)
+        conv_string = "assign out_fmap[%s][%s] = "%(image_x, image_y)
         for kernel_x in range(kernel_dim):
             for kernel_y in range(kernel_dim):
                 conv_x_coord = image_x + kernel_x

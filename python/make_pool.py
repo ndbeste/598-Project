@@ -8,8 +8,8 @@ f.write("module poolchan1 (\n")
 # make clk/ rst
 f.write("    input  logic clk,\n")
 f.write("    input  logic rst_n,\n")
-f.write("    input  logic pool_in [0:24][0:24],\n")
-f.write("    output logic pool_out[0:12][0:12]\n")
+f.write("    input  logic pool_in [0:23][0:23],\n")
+f.write("    output logic pool_out[0:11][0:11]\n")
 f.write(");\n\n")
 
 f.write("always_ff @(posedge clk) begin\n")
