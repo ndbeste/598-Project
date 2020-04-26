@@ -17,7 +17,7 @@ for i in range(90):
 f.write("\n")
 
 for i in range(18):
-    f.write("accbin2 ab_2_%s (.accbin_in(xor_out[%s:%s]), .kernel_offset(kernel_offset[%s]), .accbin_out(conv_one_out[%s]));\n"%(i,i*5,i*5+4,i,i))
+    f.write("accbin1 ab_1_%s (.accbin_in(xor_out[%s:%s]), .kernel_offset(kernel_offset[%s]), .accbin_out(conv_one_out[%s]));\n"%(i,i*5,i*5+4,i,i))
 
 f.write("\nendmodule")
 f.close()
@@ -43,7 +43,9 @@ f.close()
 
 f = open("conv2.sv", "w")
 
-f.write("module conv2(\n")
+f.write("module conv2\n")
+f.write("    #( parameter bW = 8 )\n")
+f.write("    (\n")
 f.write("    input  logic           pool_one_out              [0:  17][0:11][0:11],\n")
 f.write("    input  logic           kernels                   [0:1079][0: 4][0: 4],\n")
 f.write("    input  logic [bW-1:0]  kernel_offset             [0:  59],\n")

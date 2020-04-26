@@ -48,7 +48,7 @@ for ox in range(12):
         f.write("assign sum_out[%s][%s] = "%(ox,oy))
         for c in range(18):
             f.write("accbin_in[%s][%s][%s]"%(c,ox,oy))
-            if c != 18:
+            if c != 17:
                 f.write(" + ")
         f.write(";\n")
 

@@ -1,4 +1,6 @@
-module conv2(
+module conv2
+    #( parameter bW = 8 )
+    (
     input  logic           pool_one_out              [0:  17][0:11][0:11],
     input  logic           kernels                   [0:1079][0: 4][0: 4],
     input  logic [bW-1:0]  kernel_offset             [0:  59],
