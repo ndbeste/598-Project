@@ -60,7 +60,7 @@ for i in range(1080):
 f.write("\n")
 
 for i in range(60):
-    f.write("accbin2 ab_2_%s (.accbin_in(xor_out[%s:%s]), .kernel_offset(kernel_offset[%s]), .accbin_out(conv_one_out[%s]));\n"%(i,i*60,i*60+19,i,i))
+    f.write("accbin2 ab_2_%s (.accbin_in(xor_out[%s:%s]), .kernel_offset(kernel_offset[%s]), .accbin_out(conv_one_out[%s]));\n"%(i,i*18,i*18+17,i,i))
 
 f.write("\nendmodule")
 f.close()
