@@ -55,7 +55,7 @@ f.write("    );\n\n")
 f.write("logic       xor_out [0:1079][0:23][0:23];\n\n")
 
 for i in range(1080):
-    f.write("convchan2 c_2_%s (.image, .kernel(kernels[%s]), .conv_out(xor_out[%s]));\n"%(i,i,i))
+    f.write("convchan2 c_2_%s (.image(image[%s]), .kernel(kernels[%s]), .conv_out(xor_out[%s]));\n"%(i,int(i/60),i,i))
 
 f.write("\n")
 
