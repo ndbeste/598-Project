@@ -2,13 +2,13 @@
 
 
 module targmax10
-	#( parameter bW = 17 )
-	 ( 
-            input logic [bW-1:0] bids [9:0],
-	   output logic [3:0] winner
-	 );
+  #( parameter bW = 17 )
+   ( 
+      input  logic [bW-1:0] bids [9:0],
+      output logic [3:0]    win_out
+   );
 
-  logic [3:0] max01, max23, max45, max67, max89, max0123, max4567;
+  logic [3   :0] max01, max23, max45, max67, max89, max0123, max4567;
   logic [bW-1:0] maxbid01, maxbid23, maxbid45, maxbid67, maxbid89;
 
   assign max01 = {3'b000, (bids[0] < bids[1])};
@@ -26,17 +26,25 @@ module targmax10
   assign max0123 = {2'b00, (bids[max23] > bids[max01]), (bids[max01] > bids[max23])? max01[0] : max23[0] };
   assign max4567 = {2'b01, (bids[max67] > bids[max45]), (bids[max45] > bids[max67])? max45[0] : max67[0] };
 
-
+  logic [3:0] winner;
   always_comb begin
     priority case (1'b1)
-       (bids[max0123] > bids[max89]) && bids[max0123] > bids[max4567] : winner = max0123;
-       (bids[max89] > bids[max4567])     : winner = max89;
-       default			   : winner =  max4567;
+       (bids[max0123] > bids[max89] ) && (bids[max0123] > bids[max4567]) : winner = max0123;
+       (bids[max89]  > bids[max4567])                                    : winner = max89;
+       default                                                           : winner =  max4567;
     endcase
   end
 
-
-
+  always_ff @(posedge clk) begin
+    // synopsis dont_retime true
+    // synopsis dont_touch  true
+    if(~rst_n) begin
+      win_out <= '0;
+    end else begin
+      win_out <= winner;
+    end
+  end
+  
 endmodule
 
 

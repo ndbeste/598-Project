@@ -46,17 +46,19 @@ module argmax10
     priority case (1'b1)
        (maxbid0123 > maxbid456789) : winner = {2'b00, max0123};
        (maxbid89 > maxbid4567)     : winner = {3'b100, max89};
-       default			   : winner = {2'b01, max4567};
+       default			               : winner = {2'b01, max4567};
     endcase
   end
 
- always_ff @(posedge clk) begin
-   if(~rst_n) begin
-     win_out <= '0;
-   end else begin
-     win_out <= winner;
-   end
- end
+  always_ff @(posedge clk) begin
+    // synopsis dont_retime true
+    // synopsis dont_touch  true
+    if(~rst_n) begin
+      win_out <= '0;
+    end else begin
+      win_out <= winner;
+    end
+  end
 
 endmodule
 

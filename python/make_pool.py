@@ -4,6 +4,29 @@ o_dim = int(i_dim/p_dim) # output dimention
 
 f = open('poolchan1.sv','w')
 
+
+f.write("\
+typedef logic       d_fmap1_t     [0:23][0:23] ;\n\
+typedef logic       d_pool1_t     [0:11][0:11] ;\n\
+\n\
+module poolchan1 (\n\
+    input  logic             clk        ,\n\
+    input  logic             rst_n      ,\n\
+    input  logic [0:24*24-1] i_pool_in  ,\n\
+    output logic [0:12*12-1] o_pool_out\n\
+);\n\
+\n\
+d_fmap1_t pool_in  ;\n\
+d_pool1_t pool_out ;\n\
+\n\
+genvar i,j;\n\
+for (i=0; i<24; i=i+1) begin\n\
+    for (j=0; j<24; j=j+1) begin\n\
+        assign pool_in[i][j] = i_pool_in[ i*24 + j ];\n\
+    end\n\
+end\n\n\
+")
+
 f.write("module poolchan1 (\n")
 # make clk/ rst
 f.write("    input  logic clk,\n")
@@ -47,7 +70,15 @@ for ox in range(o_dim):
     f.write("\n")
 
 f.write("    end\n")
-f.write("end\n")
+f.write("end\n\n")
+
+f.write("\
+for (i=0; i<12; i=i+1) begin\n\
+    for (j=0; j<12; j=j+1) begin\n\
+        assign o_pool_out[i*12 + j] = pool_out[i][j];\n\
+    end\n\
+end\n\n\
+")
 
 f.write("\nendmodule")
 
@@ -58,6 +89,28 @@ i_dim = 8 # input dimention
 o_dim = int(i_dim/p_dim) # output dimention
 
 f = open('poolchan2.sv','w')
+
+f.write("\
+typedef logic       d_fmap2_t     [0:7][0:7] ;\n\
+typedef logic       d_pool2_t     [0:3][0:3] ;\n\
+\n\
+module poolchan2 (\n\
+    input  logic           clk        ,\n\
+    input  logic           rst_n      ,\n\
+    input  logic [0:8*8-1] i_pool_in  ,\n\
+    output logic [0:4*4-1] o_pool_out \n\
+);\n\
+\n\
+d_fmap2_t pool_in  ;\n\
+d_pool2_t pool_out ;\n\
+\n\
+genvar i,j;\n\
+for (i=0; i<8; i=i+1) begin\n\
+    for (j=0; j<8; j=j+1) begin\n\
+        assign pool_in[i][j] = i_pool_in[ i*8 + j ];\n\
+    end\n\
+end\n\n\
+")
 
 f.write("module poolchan2 (\n");
 f.write("    input  logic clk,\n")
@@ -86,5 +139,13 @@ for ox in range(o_dim):
 
 f.write("    end\n")
 f.write("end\n")
+
+f.write("\
+for (i=0; i<4; i=i+1) begin\n\
+    for (j=0; j<4; j=j+1) begin\n\
+        assign o_pool_out[i*4 + j] = pool_out[i][j];\n\
+    end\n\
+end\n\n\
+")
 
 f.write("\nendmodule")

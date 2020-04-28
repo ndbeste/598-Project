@@ -1,4 +1,10 @@
-// TODO: Figure out how to ACTUALLY get the data onto the chip
+typedef logic       d_image_t     [0:27][0:27] ;
+typedef logic       d_fmap1_t     [0:23][0:23] ;
+typedef logic       d_pool1_t     [0:11][0:11] ;
+typedef logic       d_fmap2_t     [0: 7][0: 7] ;
+typedef logic       d_pool2_t     [0: 3][0: 3] ;
+typedef logic       d_kernel_t    [0: 4][0: 4] ;
+typedef logic [7:0] d_offset_t                 ;
 
 module top
     #( parameter bW = 8,
@@ -9,11 +15,10 @@ module top
 
     output logic           image_in_ready,
     input  logic           image_in_valid,
-    input  logic           image          [0:27][0:27], // binary 28 x 28 image = 784 bits
+    d_image_t              image, // binary 28 x 28 image = 784 bits
 
     input  logic           kernel_in_valid, // assume always ready (one cycle write)
-    // input  logic           kernel         [0: 4][0: 4], // 5*5 = 25
-    input  logic [bW-1: 0] kernel_offset,
+    d_offset_t             kernel_offset,
     input  logic [10  : 0] kernel_addr,   // 1200 in layer 2 --> log2(1200) > 10
     input  logic [1   : 0] kernel_layer,  // 1=conv1, 2-conv2, 3=fc
 
@@ -22,29 +27,23 @@ module top
     output logic [3   : 0] class_out
 );
     // MEMORY FOR IMAGE AND WEIGHTS
-    logic               image_mem           [0:  27][0:27]; 
-    logic               kernel_mem_1        [0:  89][0: 4][0: 4]; // 5 * 18 = 90 for first layer
-    logic [bW-1 : 0]    offset_mem_1        [0:  19];
-    logic               kernel_mem_2        [0:1079][0: 4][0: 4]; // 18 * 60 = 1080 for second layer
-    logic [bW-1 : 0]    offset_mem_2        [0:  59];
-    logic [bW-1 : 0]    kernel_mem_fc       [0:   9]; 
+    d_image_t           image_mem; 
+    d_kernel_t          kernel_mem_1        [0:  89]; // 5 * 18 = 90 for first layer
+    d_offset_t          offset_mem_1        [0:  17];
+    d_kernel_t          kernel_mem_2        [0:1079]; // 18 * 60 = 1080 for second layer
+    d_offset_t          offset_mem_2        [0:  59];
+    d_offset_t          kernel_mem_fc       [0:   9]; 
     logic [fI-1 : 0]    kernel_mem_fc_bin   [0:   9]; // 10 outputs and 960 binary_weights
 
     // logic [bW-1 : 0]    offset_mem    [0:  77]; // 18 (7 bit) + 60 (9bit) = 78
     //fully connected FP mult - 8 bits x10 
-    logic [   bW-1:0] conv_one_out  [0:89][0:23][0:23]; // 16 channels 24x24
-    logic [   bW-1:0] pool_one_out  [0:89][0:11][0:11]; // 16 channels 12x12
-    logic [   bW-1:0] conv_two_out  [0:59][0: 7][0: 7]; // 60 channels 8x8
-    logic [   bW-1:0] pool_two_out  [0:59][0: 3][0: 3]; // 60 channels 4x4
-    logic [10+bW-2:0] full_con_out  [0:9]; // 60 channels 4x4
-
     logic kernel_one_wr, kernel_two_wr, kernel_fc_wr;
 
-    assign kernel_one_wr = kernel_in_valid & ( kernel_value == 2'b01 );
-    assign kernel_two_wr = kernel_in_valid & ( kernel_value == 2'b10 );
-    assign kernel_fc_wr  = kernel_in_valid & ( kernel_value == 2'b11 );
+    assign kernel_one_wr = kernel_in_valid & ( kernel_layer == 2'b01 );
+    assign kernel_two_wr = kernel_in_valid & ( kernel_layer == 2'b10 );
+    assign kernel_fc_wr  = kernel_in_valid & ( kernel_layer == 2'b11 );
 
-    logic  kernel        [0:4][0:4];
+    d_kernel_t kernel;
     assign kernel = image[0:4][0:4];
 
     logic  [3:0] hand_state;
@@ -84,7 +83,7 @@ module top
         end
     end
 
-    integer i,j,n;
+    genvar i,j,n;
     always_ff @(posedge clk) begin
     // synopsis dont_retime true
     // synopsis dont_touch  true
@@ -177,38 +176,78 @@ module top
         else image_mem <= (image_in_valid && image_in_ready) ? image : image_mem;
     end
 
-    // Do I need to duplicate the image 5 times here? or is there just 18*5 weights in the first layer?
+// 18C5
 
-    // 18C5
-    conv1 c1 (.image(image_mem), .kernels(kernel_mem_1), .kernel_offset(offset_mem_1), .conv_one_out);
+    // Flatten Image
+    logic [0:28*28-1]  f_image;
+    for (i=0; i<28; i=i+1) begin
+        for (j=0; j<28; j=j+1) begin
+            assign f_image[ 28*i + j ] = image_mem[i][j];
+        end
+    end
+
+    // Flatten Kernel
+    logic [0:90*5*5-1] f_kernel1;
+    for (n=0; n<90; n=n+1) begin
+        for (i=0; i<5; i=i+1) begin
+            for (j=0; j<5; j=j+1) begin
+                assign f_kernel1[ 5*5*n + 5*i + j ] = kernel_mem_1[n][i][j];
+            end
+        end
+    end
+
+    // Flatten Offset
+    logic [0:18*bW-1] f_offset1;
+    for (i=0; i<18; i=i+1) begin
+        for (j=0; j<bW; j=j+1) begin
+            assign f_offset1[ bW*i + j ] = offset_mem_1[i][j];
+        end
+    end
+
+    logic [0:90*24*24-1] conv_one_out;
+    conv1 c1 (.image(f_image), .kernels(f_kernel1), .kernel_offset(f_offset1), .conv_one_out);
     // 18 x 5 kernals
     // conv 18 fmaps
     // sum and compare
 
-    //P2 
+//P2
+    logic [0:90*12*12-1] pool_one_out;
     pool1 p1 (.clk, .rst_n, .pool_in(conv_one_out), .pool_out(pool_one_out) );
     // one-bit pool x 18 
-    // Pipeline inside module
-
-    // 60C5
-    conv2 c2 (.image(pool_one_out), .kernels(kernel_mem_2), .kernel_offset(offset_mem_2), .conv_two_out) ;
-
-    // P2
-    pool2 p2 (.clk, .rst_n, .pool_in(conv_two_out), .pool_out(pool_two_out) );
-    // Pipeline inside module
-
-    // Flatten
-    wire [fI-1:0] FC_in;
-    for (n=0; n<60; n=n+1) begin
+    // Pipeline inside module 
+    
+// 60C5
+    // Flatten Kernel
+    logic [0:1080*5*5-1] f_kernel2;
+    for (n=0; n<1080; n=n+1) begin
         for (i=0; i<5; i=i+1) begin
-            assign FC_in[16*n + 4*i : 16*n + 4*i + 3] = pool_two_out[n][i][0:3];
+            for (j=0; j<5; j=j+1) begin
+                assign f_kernel2[ 5*5*n + 5*i + j ] = kernel_mem_2[n][i][j];
+            end
         end
     end
 
-    // 10 FC
-    fully_connected fc1 (.fan_in(FC_in),.weights(kernel_mem_fc),.binary_weights(kernel_mem_fc_bin),.fan_out(full_con_out));
+    // Flatten Offset
+    logic [0:60*bW-1] f_offset2;
+    for (i=0; i<60; i=i+1) begin
+        for (j=0; j<bW; j=j+1) begin
+            assign f_offset2[ bW*i + j ] = offset_mem_2[i][j];
+        end
+    end
 
-    // argmax10 & output FF
+    logic [0:60*8*8-1] conv_two_out;
+    conv2 c2 (.image(pool_one_out), .kernels(f_kernel2), .kernel_offset(f_offset2), .conv_two_out) ;
+
+// P2
+    logic [0:60*4*4-1] pool_two_out;
+    pool2 p2 (.clk, .rst_n, .pool_in(conv_two_out), .pool_out(pool_two_out) );
+    // Pipeline inside module
+
+// 10 FC
+    logic [10+bW-2:0] full_con_out [0:9]; // 60 channels 4x4
+    fully_connected fc1 (.fan_in(pool_two_out),.weights(kernel_mem_fc),.binary_weights(kernel_mem_fc_bin),.fan_out(full_con_out));
+
+// argmax10 & output FF
     argmax10 argmax10_1 (.clk, .rst_n, .bids(full_con_out), .win_out(class_out));
 
 endmodule
