@@ -20,6 +20,8 @@ for (i=0; i<4; i=i+1) begin
     end
 end
 
+always_ff @(posedge clk) begin
+    if(~rst_n) begin
         pool_out[0][0] <= 1'b0;
         pool_out[0][1] <= 1'b0;
         pool_out[0][2] <= 1'b0;

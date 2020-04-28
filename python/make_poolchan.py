@@ -28,9 +28,10 @@ for (i=0; i<12; i=i+1) begin\n\
         assign o_pool_out[i*12 + j] = pool_out[i][j];\n\
     end\n\
 end\n\
+\n\
+always_ff @(posedge clk) begin\n\
+    if(~rst_n) begin\n\
 ")
-
-f.write("\n")
 
 for ox in range(o_dim):
     for oy in range(o_dim):
@@ -98,9 +99,10 @@ for (i=0; i<4; i=i+1) begin\n\
         assign o_pool_out[i*4 + j] = pool_out[i][j];\n\
     end\n\
 end\n\
+\n\
+always_ff @(posedge clk) begin\n\
+    if(~rst_n) begin\n\
 ")
-
-f.write('\n')
 
 for ox in range(o_dim):
     for oy in range(o_dim):
