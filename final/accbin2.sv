@@ -1,8 +1,8 @@
 module accbin2
     #( parameter bW = 8 )
     (
-    input  logic [0:18*12*12*bW-1] i_accbin_in,
-    input  logic [bW-1:0]          kernel_offset,
+    input  logic [0:18*12*12*bW-1] i_accbin_in     ,
+    input  logic [bW-1:0]          kernel_offset   ,
     output logic [0:8*8-1]         o_accbin_out
     );
 
@@ -14,7 +14,7 @@ genvar i,j,k;
 for (i=0; i<12; i=i+1) begin
     for (j=0; j<12; j=j+1) begin
         for (k=0; k<18; k=k+1) begin
-            assign accbin_in[i][j][k][l] = i_accbin_in[ 12*18*bW*i + 18*bW*j + bW*k : 12*18*bW*i + 18*bW*j + bW*k + 7];
+            assign accbin_in[i][j][k][bW-1:0] = i_accbin_in[ 12*18*bW*i + 18*bW*j + bW*k : 12*18*bW*i + 18*bW*j + bW*k + 7];
         end
     end
 end
@@ -24,6 +24,7 @@ for (i=0; i<12; i=i+1) begin
         assign o_accbin_out[ i*12 + j ] = accbin_out[i][j];
     end
 end
+
 assign sum_out[0][0][bW-1:0] = accbin_in[0][0][0][bW-1:0] + accbin_in[1][0][0][bW-1:0] + accbin_in[2][0][0][bW-1:0] + accbin_in[3][0][0][bW-1:0] + accbin_in[4][0][0][bW-1:0] + accbin_in[5][0][0][bW-1:0] + accbin_in[6][0][0][bW-1:0] + accbin_in[7][0][0][bW-1:0] + accbin_in[8][0][0][bW-1:0] + accbin_in[9][0][0][bW-1:0] + accbin_in[10][0][0][bW-1:0] + accbin_in[11][0][0][bW-1:0] + accbin_in[12][0][0][bW-1:0] + accbin_in[13][0][0][bW-1:0] + accbin_in[14][0][0][bW-1:0] + accbin_in[15][0][0][bW-1:0] + accbin_in[16][0][0][bW-1:0] + accbin_in[17][0][0][bW-1:0];
 assign sum_out[0][1][bW-1:0] = accbin_in[0][0][1][bW-1:0] + accbin_in[1][0][1][bW-1:0] + accbin_in[2][0][1][bW-1:0] + accbin_in[3][0][1][bW-1:0] + accbin_in[4][0][1][bW-1:0] + accbin_in[5][0][1][bW-1:0] + accbin_in[6][0][1][bW-1:0] + accbin_in[7][0][1][bW-1:0] + accbin_in[8][0][1][bW-1:0] + accbin_in[9][0][1][bW-1:0] + accbin_in[10][0][1][bW-1:0] + accbin_in[11][0][1][bW-1:0] + accbin_in[12][0][1][bW-1:0] + accbin_in[13][0][1][bW-1:0] + accbin_in[14][0][1][bW-1:0] + accbin_in[15][0][1][bW-1:0] + accbin_in[16][0][1][bW-1:0] + accbin_in[17][0][1][bW-1:0];
 assign sum_out[0][2][bW-1:0] = accbin_in[0][0][2][bW-1:0] + accbin_in[1][0][2][bW-1:0] + accbin_in[2][0][2][bW-1:0] + accbin_in[3][0][2][bW-1:0] + accbin_in[4][0][2][bW-1:0] + accbin_in[5][0][2][bW-1:0] + accbin_in[6][0][2][bW-1:0] + accbin_in[7][0][2][bW-1:0] + accbin_in[8][0][2][bW-1:0] + accbin_in[9][0][2][bW-1:0] + accbin_in[10][0][2][bW-1:0] + accbin_in[11][0][2][bW-1:0] + accbin_in[12][0][2][bW-1:0] + accbin_in[13][0][2][bW-1:0] + accbin_in[14][0][2][bW-1:0] + accbin_in[15][0][2][bW-1:0] + accbin_in[16][0][2][bW-1:0] + accbin_in[17][0][2][bW-1:0];

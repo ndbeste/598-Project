@@ -14,7 +14,7 @@ genvar i,j,k;
 for (i=0; i<24; i=i+1) begin
     for (j=0; j<24; j=j+1) begin
         for (k=0; k<5; k=k+1) begin
-            assign accbin_in[i][j][k][l] = i_accbin_in[ 24*5*bW*i + 5*bW*j + bW*k : 24*5*bW*i + 5*bW*j + bW*k + 7 ];
+            assign accbin_in[i][j][k][bW-1:0] = i_accbin_in[ 24*5*bW*i + 5*bW*j + bW*k : 24*5*bW*i + 5*bW*j + bW*k + 7 ];
         end
     end
 end

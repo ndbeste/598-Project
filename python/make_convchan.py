@@ -37,7 +37,7 @@ end\n\
 for (i=0; i<24; i=i+1) begin\n\
     for (j=0; j<24; j=j+1) begin\n\
         for (k=0; k<bW; k=k+1) begin\n\
-            assign o_out_fmap[ 24*8*i + 8*j + k ] = out_fmap[i][j][k];\n\
+            assign o_out_fmap[ 24*bW*i + bW*j + k ] = out_fmap[i][j][k];\n\
         end\n\
     end\n\
 end\n\
@@ -102,7 +102,7 @@ end\n\
 for (i=0; i<8; i=i+1) begin\n\
     for (j=0; j<8; j=j+1) begin\n\
         for (k=0; k<bW; k=k+1) begin\n\
-            assign o_out_fmap[i][j][k] = out_fmap[ 8*bW*i + bW*j + k ];\n\
+            assign o_out_fmap[ 8*bW*i + bW*j + k ] = out_fmap[i][j][k];\n\
         end\n\
     end\n\
 end\n\

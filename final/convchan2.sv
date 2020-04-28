@@ -1,6 +1,6 @@
-typedef logic          d_image_t    [0:11][0:11];
-typedef logic          d_kernel_t   [0: 4][0: 4];
-typedef logic [7:0]    d_fmap_out_t [0: 7][0: 7];
+typedef logic       d_image_t    [0:11][0:11];
+typedef logic       d_kernel_t   [0: 4][0: 4];
+typedef logic [7:0] d_fmap_out_t [0: 7][0: 7];
 
 module convchan2 
     #( parameter bW = 8 )
@@ -30,7 +30,7 @@ end
 for (i=0; i<8; i=i+1) begin
     for (j=0; j<8; j=j+1) begin
         for (k=0; k<bW; k=k+1) begin
-            assign o_out_fmap[i][j][k] = out_fmap[ 8*bW*i + bW*j + k ];
+            assign o_out_fmap[ 8*bW*i + bW*j + k ] = out_fmap[i][j][k];
         end
     end
 end

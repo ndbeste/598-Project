@@ -17,7 +17,7 @@ genvar i,j,k;\n\
 for (i=0; i<24; i=i+1) begin\n\
     for (j=0; j<24; j=j+1) begin\n\
         for (k=0; k<5; k=k+1) begin\n\
-            assign accbin_in[i][j][k][l] = i_accbin_in[ 24*5*bW*i + 5*bW*j + bW*k : 24*5*bW*i + 5*bW*j + bW*k + 7 ];\n\
+            assign accbin_in[i][j][k][bW-1:0] = i_accbin_in[ 24*5*bW*i + 5*bW*j + bW*k : 24*5*bW*i + 5*bW*j + bW*k + 7 ];\n\
         end\n\
     end\n\
 end\n\
@@ -71,7 +71,7 @@ genvar i,j,k;\n\
 for (i=0; i<12; i=i+1) begin\n\
     for (j=0; j<12; j=j+1) begin\n\
         for (k=0; k<18; k=k+1) begin\n\
-            assign accbin_in[i][j][k][l] = i_accbin_in[ 12*18*bW*i + 18*bW*j + bW*k : 12*18*bW*i + 18*bW*j + bW*k + 7];\n\
+            assign accbin_in[i][j][k][bW-1:0] = i_accbin_in[ 12*18*bW*i + 18*bW*j + bW*k : 12*18*bW*i + 18*bW*j + bW*k + 7];\n\
         end\n\
     end\n\
 end\n\
