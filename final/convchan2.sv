@@ -1,6 +1,6 @@
 typedef logic          d_image_t    [0:11][0:11];
 typedef logic          d_kernel_t   [0: 4][0: 4];
-typedef logic [bW-1:0] d_fmap_out_t [0: 7][0: 7];
+typedef logic [7:0]    d_fmap_out_t [0: 7][0: 7];
 
 module convchan2 
     #( parameter bW = 8 )

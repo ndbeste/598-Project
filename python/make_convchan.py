@@ -5,9 +5,9 @@ fmap_dim  = 24;
 f = open("convchan1.sv", "w")
 
 f.write("\
-typedef logic          d_image_t    [0:27][0:27];\n\
-typedef logic          d_kernel_t   [0: 4][0: 4];\n\
-typedef logic [bW-1:0] d_fmap_out_t [0:23][0:23];\n\
+typedef logic       d_image_t    [0:27][0:27];\n\
+typedef logic       d_kernel_t   [0: 4][0: 4];\n\
+typedef logic [7:0] d_fmap_out_t [0:23][0:23];\n\
 \n\
 module convchan1 \n\
     #( parameter bW = 8 )\n\
@@ -70,9 +70,9 @@ f = open("convchan2.sv", "w")
 
 
 f.write("\
-typedef logic          d_image_t    [0:11][0:11];\n\
-typedef logic          d_kernel_t   [0: 4][0: 4];\n\
-typedef logic [bW-1:0] d_fmap_out_t [0: 7][0: 7];\n\
+typedef logic       d_image_t    [0:11][0:11];\n\
+typedef logic       d_kernel_t   [0: 4][0: 4];\n\
+typedef logic [7:0] d_fmap_out_t [0: 7][0: 7];\n\
 \n\
 module convchan2 \n\
     #( parameter bW = 8 )\n\

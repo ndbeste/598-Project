@@ -58,8 +58,8 @@ f.write("\
 module accbin2\n\
     #( parameter bW = 8 )\n\
     (\n\
-    input  logic [0:18*12*12*bW-1] i_accbin_in,\n\
-    input  logic [bW-1:0]          kernel_offset,\n\
+    input  logic [0:18*12*12*bW-1] i_accbin_in     ,\n\
+    input  logic [bW-1:0]          kernel_offset   ,\n\
     output logic [0:8*8-1]         o_accbin_out\n\
     );\n\
 \n\
@@ -82,6 +82,8 @@ for (i=0; i<12; i=i+1) begin\n\
     end\n\
 end\n\
 ")
+
+f.write('\n')
 
 for ox in range(12):
     for oy in range(12):

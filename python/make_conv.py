@@ -26,8 +26,8 @@ f.write("\
 module conv2\n\
     #( parameter bW = 8 )\n\
     (\n\
-    input  logic [0:18*12*12 -1]      image         ,\n\
-    input  logic [0:18*60*5*5-1]      kernels       ,\n\
+    input  logic [0:18*12*12   -1]    image         ,\n\
+    input  logic [0:18*60*5*5  -1]    kernels       ,\n\
     output logic [0:18*60*8*8*bW-1]   xor_out \n\
     );\n\
 ")

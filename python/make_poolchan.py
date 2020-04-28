@@ -25,9 +25,15 @@ for (i=0; i<24; i=i+1) begin\n\
         assign pool_in[i][j] = i_pool_in[ i*24 + j ];\n\
     end\n\
 end\n\
+\n\
+for (i=0; i<12; i=i+1) begin\n\
+    for (j=0; j<12; j=j+1) begin\n\
+        assign o_pool_out[i*12 + j] = pool_out[i][j];\n\
+    end\n\
+end\n\
 ")
 
-f.write('\n')
+f.write("\n")
 
 for ox in range(o_dim):
     for oy in range(o_dim):
@@ -61,15 +67,7 @@ for ox in range(o_dim):
     f.write("\n")
 
 f.write("    end\n")
-f.write("end\n\n")
-
-f.write("\
-for (i=0; i<12; i=i+1) begin\n\
-    for (j=0; j<12; j=j+1) begin\n\
-        assign o_pool_out[i*12 + j] = pool_out[i][j];\n\
-    end\n\
-end\n\n\
-")
+f.write("end\n")
 
 f.write("\nendmodule")
 
@@ -101,6 +99,11 @@ for (i=0; i<8; i=i+1) begin\n\
         assign pool_in[i][j] = i_pool_in[ i*8 + j ];\n\
     end\n\
 end\n\
+for (i=0; i<4; i=i+1) begin\n\
+    for (j=0; j<4; j=j+1) begin\n\
+        assign o_pool_out[i*4 + j] = pool_out[i][j];\n\
+    end\n\
+end\n\
 ")
 
 f.write('\n')
@@ -122,13 +125,5 @@ for ox in range(o_dim):
 
 f.write("    end\n")
 f.write("end\n")
-
-f.write("\
-for (i=0; i<4; i=i+1) begin\n\
-    for (j=0; j<4; j=j+1) begin\n\
-        assign o_pool_out[i*4 + j] = pool_out[i][j];\n\
-    end\n\
-end\n\n\
-")
 
 f.write("\nendmodule")

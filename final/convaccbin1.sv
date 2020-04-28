@@ -1,7 +1,8 @@
 module convaccbin1
     #( parameter bW = 8 )
     (
-    input  logic [0:5*18*24*24*bW-1] xor_in;    output logic [0:18*24*24     -1] conv_one_out  
+    input  logic [0:5*18*24*24*bW-1] xor_in, 
+    output logic [0:18*24*24     -1] conv_one_out  
     );
 
 accbin1 ab_1_0 (.i_accbin_in(xor_out[0*5*24*24*bW:1*5*24*24*bW-1]), .kernel_offset(kernel_offset[0*bW:1*bW-1]), .o_accbin_out(conv_one_out[0*24*24:1*24*24-1]));
