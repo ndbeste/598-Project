@@ -23,8 +23,8 @@ f = open("pool2.sv", "w")
 
 f.write("\
 module pool2(\n\
-    input  logic clk                    ,\n\
-    input  logic rst_n                  ,\n\
+    input  logic              clk       ,\n\
+    input  logic              rst_n     ,\n\
     input  logic [0:60*8*8-1] fmaps_in  ,\n\
     output logic [0:60*4*4-1] fmaps_out \n\
     );\n\

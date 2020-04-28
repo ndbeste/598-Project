@@ -2,9 +2,9 @@
 module fast_argmax10
 	#( parameter bW = 16 )
 	 ( 
-           input  logic clk,
-           input  logic rst_n,
-           input  logic [bW-1:0] bids [0:9],
+     input  logic clk,
+     input  logic rst_n,
+     input  logic [bW-1:0] bids [0:9],
 	   output logic [3:0] win_out
 	 );
 
