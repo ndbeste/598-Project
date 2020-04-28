@@ -196,6 +196,11 @@ module top
         end
     end
 
+    logic [0:5*18*24*24*bW-1] xor_out1;
+    conv1 c1 (.image(f_image), .kernels(f_kernel1),  .xor_out(xor_out1));
+    // 18 x 5 kernals
+    // conv 18 fmaps
+
     // Flatten Offset
     logic [0:18*bW-1] f_offset1;
     for (i=0; i<18; i=i+1) begin
@@ -205,9 +210,7 @@ module top
     end
 
     logic [0:90*24*24-1] conv_one_out;
-    conv1 c1 (.image(f_image), .kernels(f_kernel1), .kernel_offset(f_offset1), .conv_one_out);
-    // 18 x 5 kernals
-    // conv 18 fmaps
+    convaccbin1 cab1 (.xor_in(xor_out1), .kernel_offset(f_offset1), .conv_one_out)
     // sum and compare
 
 //P2
@@ -227,6 +230,9 @@ module top
         end
     end
 
+    logic [0:18*60*24*24*bW-1] xor_out2;
+    conv2 c2 (.image(pool_one_out), .kernels(f_kernel2), .xor_out(xor_out2) );
+
     // Flatten Offset
     logic [0:60*bW-1] f_offset2;
     for (i=0; i<60; i=i+1) begin
@@ -236,7 +242,7 @@ module top
     end
 
     logic [0:60*8*8-1] conv_two_out;
-    conv2 c2 (.image(pool_one_out), .kernels(f_kernel2), .kernel_offset(f_offset2), .conv_two_out) ;
+    convaccbin2 cab2 (.xor_in(xor_out2), .kernel_offset(f_offset2), .conv_two_out)
 
 // P2
     logic [0:60*4*4-1] pool_two_out;

@@ -10,13 +10,11 @@ logic [bW-1:0] sum_out         [0:11][0:11];
 logic [bW-1:0] accbin_in  [0:4][0:11][0:11];
 logic          accbin_out      [0: 7][0: 7];
 
-genvar i,j,k,l;
+genvar i,j,k;
 for (i=0; i<12; i=i+1) begin
     for (j=0; j<12; j=j+1) begin
         for (k=0; k<18; k=k+1) begin
-            for(l=0; l<bW; l=l+1) begin
-                assign accbin_in[i][j][k][l] = i_accbin_in[ 12*18*bW*i + 18*bW*j + bW*k + l ];
-            end
+            assign accbin_in[i][j][k][l] = i_accbin_in[ 12*18*bW*i + 18*bW*j + bW*k : 12*18*bW*i + 18*bW*j + bW*k + 7];
         end
     end
 end
