@@ -12,7 +12,7 @@ module pool1(\n\
 f.write("\n")
 
 for i in range(18):
-    f.write("poolchan1 p_1_%s (.clk, .rst_n, .i_pool_in(fmaps_in[%s*24*24:%s*24*24-1]), .o_pool_out(fmaps_out[%s*12*12:%s*12*12-1]);\n"%(i,i,i+1,i,i+1))
+    f.write("poolchan1 p_1_%s (.clk, .rst_n, .i_pool_in(fmaps_in[%s*24*24:%s*24*24-1]), .o_pool_out(fmaps_out[%s*12*12:%s*12*12-1]));\n"%(i,i,i+1,i,i+1))
 
 f.write("\nendmodule")
 f.close()

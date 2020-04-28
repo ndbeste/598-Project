@@ -6,9 +6,6 @@ f = open('poolchan1.sv','w')
 
 
 f.write("\
-typedef logic       d_fmap1_t     [0:23][0:23] ;\n\
-typedef logic       d_pool1_t     [0:11][0:11] ;\n\
-\n\
 module poolchan1 (\n\
     input  logic             clk        ,\n\
     input  logic             rst_n      ,\n\
@@ -16,8 +13,8 @@ module poolchan1 (\n\
     output logic [0:12*12-1] o_pool_out\n\
 );\n\
 \n\
-d_fmap1_t pool_in  ;\n\
-d_pool1_t pool_out ;\n\
+logic pool_in  [0:23][0:23];\n\
+logic pool_out [0:11][0:11];\n\
 \n\
 genvar i,j;\n\
 for (i=0; i<24; i=i+1) begin\n\
@@ -80,9 +77,6 @@ o_dim = int(i_dim/p_dim) # output dimention
 f = open('poolchan2.sv','w')
 
 f.write("\
-typedef logic       d_fmap2_t     [0:7][0:7] ;\n\
-typedef logic       d_pool2_t     [0:3][0:3] ;\n\
-\n\
 module poolchan2 (\n\
     input  logic           clk        ,\n\
     input  logic           rst_n      ,\n\
@@ -90,8 +84,8 @@ module poolchan2 (\n\
     output logic [0:4*4-1] o_pool_out \n\
 );\n\
 \n\
-d_fmap2_t pool_in  ;\n\
-d_pool2_t pool_out ;\n\
+logic pool_in  [0:7][0:7];\n\
+logic pool_out [0:3][0:3];\n\
 \n\
 genvar i,j;\n\
 for (i=0; i<8; i=i+1) begin\n\

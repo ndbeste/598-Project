@@ -1,6 +1,3 @@
-typedef logic       d_fmap2_t     [0:7][0:7] ;
-typedef logic       d_pool2_t     [0:3][0:3] ;
-
 module poolchan2 (
     input  logic           clk        ,
     input  logic           rst_n      ,
@@ -8,8 +5,8 @@ module poolchan2 (
     output logic [0:4*4-1] o_pool_out 
 );
 
-d_fmap2_t pool_in  ;
-d_pool2_t pool_out ;
+logic pool_in  [0:7][0:7];
+logic pool_out [0:3][0:3];
 
 genvar i,j;
 for (i=0; i<8; i=i+1) begin
@@ -17,16 +14,12 @@ for (i=0; i<8; i=i+1) begin
         assign pool_in[i][j] = i_pool_in[ i*8 + j ];
     end
 end
+for (i=0; i<4; i=i+1) begin
+    for (j=0; j<4; j=j+1) begin
+        assign o_pool_out[i*4 + j] = pool_out[i][j];
+    end
+end
 
-module poolchan2 (
-    input  logic clk,
-    input  logic rst_n,
-    input  logic pool_in [0:7][0:7],
-    output logic pool_out[0:3][0:3]
-);
-
-always_ff @(posedge clk) begin
-    if(~rst_n) begin
         pool_out[0][0] <= 1'b0;
         pool_out[0][1] <= 1'b0;
         pool_out[0][2] <= 1'b0;
@@ -66,11 +59,5 @@ always_ff @(posedge clk) begin
 
     end
 end
-for (i=0; i<4; i=i+1) begin
-    for (j=0; j<4; j=j+1) begin
-        assign o_pool_out[i*4 + j] = pool_out[i][j];
-    end
-end
-
 
 endmodule

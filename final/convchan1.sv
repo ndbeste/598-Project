@@ -1,7 +1,3 @@
-typedef logic       d_image_t    [0:27][0:27];
-typedef logic       d_kernel_t   [0: 4][0: 4];
-typedef logic [7:0] d_fmap_out_t [0:23][0:23];
-
 module convchan1 
     #( parameter bW = 8 )
     ( 
@@ -10,9 +6,9 @@ module convchan1
     output logic [0:24*24*bW-1] o_out_fmap
     );
 
-d_image_t    image    ;
-d_kernel_t   kernel   ;
-d_fmap_out_t out_fmap ;
+logic          image    [0:27][0:27];
+logic          kernel   [0: 4][0: 4];
+logic [bW-1:0] out_fmap [0:23][0:23];
 
 genvar i,j,k;
 for (i=0; i<28; i=i+1) begin

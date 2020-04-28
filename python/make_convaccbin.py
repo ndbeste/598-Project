@@ -4,7 +4,8 @@ f.write("\
 module convaccbin1\n\
     #( parameter bW = 8 )\n\
     (\n\
-    input  logic [0:5*18*24*24*bW-1] xor_in, \n\
+    input  logic [0:5*18*24*24*bW-1] xor_in         , \n\
+    input  logic [0:  18      *bW-1] kernel_offset  , \n\
     output logic [0:  18*24*24   -1] conv_one_out  \n\
     );\n\
 ")
@@ -25,7 +26,8 @@ f.write("\
 module convaccbin2\n\
     #( parameter bW = 8 )\n\
     (\n\
-    input  logic [0:18*60*8*8*bW-1] xor_in,\n\
+    input  logic [0:18*60*8*8*bW-1] xor_in          ,\n\
+    input  logic [0:   60    *bW-1] kernel_offset   , \n\
     output logic [0:   60*8*8   -1] conv_one_out \n\
     );\n\
 ")

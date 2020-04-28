@@ -5,10 +5,6 @@ fmap_dim  = 24;
 f = open("convchan1.sv", "w")
 
 f.write("\
-typedef logic       d_image_t    [0:27][0:27];\n\
-typedef logic       d_kernel_t   [0: 4][0: 4];\n\
-typedef logic [7:0] d_fmap_out_t [0:23][0:23];\n\
-\n\
 module convchan1 \n\
     #( parameter bW = 8 )\n\
     ( \n\
@@ -17,9 +13,9 @@ module convchan1 \n\
     output logic [0:24*24*bW-1] o_out_fmap\n\
     );\n\
 \n\
-d_image_t    image    ;\n\
-d_kernel_t   kernel   ;\n\
-d_fmap_out_t out_fmap ;\n\
+logic          image    [0:27][0:27];\n\
+logic          kernel   [0: 4][0: 4];\n\
+logic [bW-1:0] out_fmap [0:23][0:23];\n\
 \n\
 genvar i,j,k;\n\
 for (i=0; i<28; i=i+1) begin\n\
