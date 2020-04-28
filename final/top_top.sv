@@ -43,7 +43,7 @@ module top_top
 
 
    int i;
-   int img, f, val, x, y, cycles;
+   int img, f, val, x, y, cycles, filter, node_index;
 
 
   //
@@ -67,6 +67,57 @@ module top_top
          image[y][x] = val;
        end
      end
+
+     f = $fopen("../inputs/conv1_kernel%d.dat", img, "r");
+     for (filter=0; filter<(18*5); filter = filter+1) begin
+       for  (y = 0; y < 5; y = y + 1) begin
+         for (x = 0; x < 5; x = x + 1) begin
+           $fscanf(f, "%b ", val );
+           dut.kernel_mem_1[filter][y][x] = val;
+         end
+       end
+     end
+
+     f = $fopen("../inputs/conv2_kernel%d.dat", img, "r");
+     for (filter=0; filter<(18*60); filter = filter+1) begin
+       for  (y = 0; y < 5; y = y + 1) begin
+         for (x = 0; x < 5; x = x + 1) begin
+           $fscanf(f, "%b ", val );
+           dut.kernel_mem_2[filter][y][x] = val;
+         end
+       end
+     end
+
+
+    f = $fopen("inputs/fc_weights%d.dat", img, "r");
+   while (  2 == $fscanf(f, "%d %d", node_index, val ) )
+   begin
+         dut.kernel_mem_fc[node_index] = val;
+
+   end
+   //f = $fopen("inputs/fc_input.dat", "r");
+
+    //for(i = 0; i < 960; i ++) begin
+
+    //   $fscanf(f, "%b", val_bit );
+    //   fan_in[959-i] = val_bit;
+    //end
+
+     //f = $fopen("inputs/fc_output%d.dat", img, "r");
+
+    //for(i = 0; i < 960; i ++) begin
+
+     //  $fscanf(f, "%d", val );
+     //  golden_output[i] = val;
+    //end
+
+   f = $fopen("inputs/fc_binary_weights%d.dat", img, "r");
+   while (  2 == $fscanf(f, "%d %b", node_index, val ) )
+   begin
+    for(i = 0; i < 960; i ++) begin
+         dut.kernel_mem_fc_bin[node_index][i] = val[i];
+    end 
+  end
 
 
 
