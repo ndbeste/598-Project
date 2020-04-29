@@ -1,6 +1,6 @@
 
 module fast_argmax10
-	#( parameter bW = 16 )
+	#( parameter bW = 17 )
 	 ( 
      input  logic clk,
      input  logic rst_n,

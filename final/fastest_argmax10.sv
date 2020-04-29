@@ -3,7 +3,7 @@
 // Area = 1028 um2, Timing = 822.8ps, Power = 9.40e-03 mW
 
 module fastest_argmax10
-	#( parameter bW = 16 )
+	#( parameter bW = 17 )
 	 ( 
      input  logic clk,
      input  logic rst_n,
