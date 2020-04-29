@@ -48,7 +48,11 @@ module top
     assign kernel_fc_wr  = kernel_in_valid & ( kernel_layer == 2'b11 );
 
     d_kernel_t kernel;
-    assign kernel = image[0:4][0:4]; // Errors here?
+    assign kernel[0] = image[0][0:4];
+    assign kernel[1] = image[1][0:4];
+    assign kernel[2] = image[2][0:4];
+    assign kernel[3] = image[3][0:4];
+    assign kernel[4] = image[4][0:4];
 
     logic  [3:0] hand_state;
     logic  [3:0] conv_count;
@@ -148,7 +152,6 @@ module top
         end else begin
             // input 20 bits at a time
             for(n=0; n<fI/20; n=n+1) begin
-                i = n * 20;
                 kernel_mem_fc[kernel_addr] <= kernel_fc_wr ? kernel : kernel_mem_fc[kernel_addr]; 
             end
         end

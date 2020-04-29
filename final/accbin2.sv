@@ -1,7 +1,7 @@
 module accbin2
     #( parameter bW = 8 )
     (
-    input  logic [0:18*12*12*bW-1] i_accbin_in     ,
+    input  logic [0:18*8*8*bW-1] i_accbin_in     ,
     input  logic [bW-1:0]          kernel_offset   ,
     output logic [0:8*8-1]         o_accbin_out
     );
