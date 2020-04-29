@@ -149,12 +149,7 @@ module top
             for(n=0; n<10; n=n+1) begin
                 kernel_mem_fc[n] <= '0;
             end
-        end else begin
-            // input 20 bits at a time
-            for(n=0; n<fI/20; n=n+1) begin
-                kernel_mem_fc[kernel_addr] <= kernel_fc_wr ? kernel : kernel_mem_fc[kernel_addr]; 
-            end
-        end
+        end else kernel_mem_fc[kernel_addr] <= kernel_fc_wr ? kernel_offset : kernel_mem_fc[kernel_addr]; 
     end
 
     always_ff @(posedge clk) begin
@@ -163,7 +158,7 @@ module top
                 kernel_mem_fc_bin[n] <= '0;
             end
         end else begin
-            // input 20 bits at a time
+            // input 20 bits at a time, one cycle apart
             for(n=0; n<fI/20; n=n+1) begin
                 kernel_mem_fc_bin[kernel_addr][(n*20):(n*20)+19] <= kernel_fc_wr ? image[0][0:19] : kernel_mem_fc[kernel_addr][(n*20):(n*20)+19]; 
             end
