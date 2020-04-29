@@ -53,7 +53,7 @@ module top_top
   //
   initial begin
 
-    rst_n = 1'b0;
+    rst_n = 1'b0; //Clock through several times on reset
     for (cycles = 0; cycles < 5; cycles = cycles + 1) begin
         #500 clk = 1'b0 ;
 	#500 clk = 1'b1 ;
@@ -158,12 +158,13 @@ module top_top
        $display(dut.full_con_out[i]);
        dummy=$fscanf(f, "%d", val );
        $display(val);
+       assert(val == dut.full_con_out[i]);
     end
     
        
-    f = $fopen({"../inputs/winner", img, ".dat"}, "r");
-    dummy=$fscanf(f, "%d", val);
-    golden_output = val;
+    //f = $fopen({"../inputs/winner", img, ".dat"}, "r");
+    //dummy=$fscanf(f, "%d", val);
+    //golden_output = val;
     
 
     image_in_valid = 1'b1;
@@ -174,13 +175,13 @@ module top_top
                 #500 clk = 1'b0 ;
                 #500 clk = 1'b1 ;
         end
-    image_in_valid = 1'b0;
+    //image_in_valid = 1'b0;
       // Check output
-      assert(golden_output === class_out);
-	$display(class_out);
-	$display(golden_output);
-        $sformat(file_name, "../inputs/image%0d.dat",img);
-	$display(file_name);
+      //assert(golden_output === class_out);
+	//$display(class_out);
+	//$display(golden_output);
+        //$sformat(file_name, "../inputs/image%0d.dat",img);
+	//$display(file_name);
 
 
     end
