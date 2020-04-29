@@ -1,0 +1,100 @@
+module conv1
+    #( parameter bW = 8 )
+    (
+    input  logic [0:28*28-1]         image           ,
+    input  logic [0:90*5*5-1]        kernels         , 
+    output logic [0:5*18*24*24*bW-1] xor_out  
+    );
+
+convchan1 c_1_0 (.i_image(image), .i_kernel(kernels[0*5*5:1*5*5-1]), .o_out_fmap(xor_out[0*24*24*bW:1*24*24*bW-1]));
+convchan1 c_1_1 (.i_image(image), .i_kernel(kernels[1*5*5:2*5*5-1]), .o_out_fmap(xor_out[1*24*24*bW:2*24*24*bW-1]));
+convchan1 c_1_2 (.i_image(image), .i_kernel(kernels[2*5*5:3*5*5-1]), .o_out_fmap(xor_out[2*24*24*bW:3*24*24*bW-1]));
+convchan1 c_1_3 (.i_image(image), .i_kernel(kernels[3*5*5:4*5*5-1]), .o_out_fmap(xor_out[3*24*24*bW:4*24*24*bW-1]));
+convchan1 c_1_4 (.i_image(image), .i_kernel(kernels[4*5*5:5*5*5-1]), .o_out_fmap(xor_out[4*24*24*bW:5*24*24*bW-1]));
+convchan1 c_1_5 (.i_image(image), .i_kernel(kernels[5*5*5:6*5*5-1]), .o_out_fmap(xor_out[5*24*24*bW:6*24*24*bW-1]));
+convchan1 c_1_6 (.i_image(image), .i_kernel(kernels[6*5*5:7*5*5-1]), .o_out_fmap(xor_out[6*24*24*bW:7*24*24*bW-1]));
+convchan1 c_1_7 (.i_image(image), .i_kernel(kernels[7*5*5:8*5*5-1]), .o_out_fmap(xor_out[7*24*24*bW:8*24*24*bW-1]));
+convchan1 c_1_8 (.i_image(image), .i_kernel(kernels[8*5*5:9*5*5-1]), .o_out_fmap(xor_out[8*24*24*bW:9*24*24*bW-1]));
+convchan1 c_1_9 (.i_image(image), .i_kernel(kernels[9*5*5:10*5*5-1]), .o_out_fmap(xor_out[9*24*24*bW:10*24*24*bW-1]));
+convchan1 c_1_10 (.i_image(image), .i_kernel(kernels[10*5*5:11*5*5-1]), .o_out_fmap(xor_out[10*24*24*bW:11*24*24*bW-1]));
+convchan1 c_1_11 (.i_image(image), .i_kernel(kernels[11*5*5:12*5*5-1]), .o_out_fmap(xor_out[11*24*24*bW:12*24*24*bW-1]));
+convchan1 c_1_12 (.i_image(image), .i_kernel(kernels[12*5*5:13*5*5-1]), .o_out_fmap(xor_out[12*24*24*bW:13*24*24*bW-1]));
+convchan1 c_1_13 (.i_image(image), .i_kernel(kernels[13*5*5:14*5*5-1]), .o_out_fmap(xor_out[13*24*24*bW:14*24*24*bW-1]));
+convchan1 c_1_14 (.i_image(image), .i_kernel(kernels[14*5*5:15*5*5-1]), .o_out_fmap(xor_out[14*24*24*bW:15*24*24*bW-1]));
+convchan1 c_1_15 (.i_image(image), .i_kernel(kernels[15*5*5:16*5*5-1]), .o_out_fmap(xor_out[15*24*24*bW:16*24*24*bW-1]));
+convchan1 c_1_16 (.i_image(image), .i_kernel(kernels[16*5*5:17*5*5-1]), .o_out_fmap(xor_out[16*24*24*bW:17*24*24*bW-1]));
+convchan1 c_1_17 (.i_image(image), .i_kernel(kernels[17*5*5:18*5*5-1]), .o_out_fmap(xor_out[17*24*24*bW:18*24*24*bW-1]));
+convchan1 c_1_18 (.i_image(image), .i_kernel(kernels[18*5*5:19*5*5-1]), .o_out_fmap(xor_out[18*24*24*bW:19*24*24*bW-1]));
+convchan1 c_1_19 (.i_image(image), .i_kernel(kernels[19*5*5:20*5*5-1]), .o_out_fmap(xor_out[19*24*24*bW:20*24*24*bW-1]));
+convchan1 c_1_20 (.i_image(image), .i_kernel(kernels[20*5*5:21*5*5-1]), .o_out_fmap(xor_out[20*24*24*bW:21*24*24*bW-1]));
+convchan1 c_1_21 (.i_image(image), .i_kernel(kernels[21*5*5:22*5*5-1]), .o_out_fmap(xor_out[21*24*24*bW:22*24*24*bW-1]));
+convchan1 c_1_22 (.i_image(image), .i_kernel(kernels[22*5*5:23*5*5-1]), .o_out_fmap(xor_out[22*24*24*bW:23*24*24*bW-1]));
+convchan1 c_1_23 (.i_image(image), .i_kernel(kernels[23*5*5:24*5*5-1]), .o_out_fmap(xor_out[23*24*24*bW:24*24*24*bW-1]));
+convchan1 c_1_24 (.i_image(image), .i_kernel(kernels[24*5*5:25*5*5-1]), .o_out_fmap(xor_out[24*24*24*bW:25*24*24*bW-1]));
+convchan1 c_1_25 (.i_image(image), .i_kernel(kernels[25*5*5:26*5*5-1]), .o_out_fmap(xor_out[25*24*24*bW:26*24*24*bW-1]));
+convchan1 c_1_26 (.i_image(image), .i_kernel(kernels[26*5*5:27*5*5-1]), .o_out_fmap(xor_out[26*24*24*bW:27*24*24*bW-1]));
+convchan1 c_1_27 (.i_image(image), .i_kernel(kernels[27*5*5:28*5*5-1]), .o_out_fmap(xor_out[27*24*24*bW:28*24*24*bW-1]));
+convchan1 c_1_28 (.i_image(image), .i_kernel(kernels[28*5*5:29*5*5-1]), .o_out_fmap(xor_out[28*24*24*bW:29*24*24*bW-1]));
+convchan1 c_1_29 (.i_image(image), .i_kernel(kernels[29*5*5:30*5*5-1]), .o_out_fmap(xor_out[29*24*24*bW:30*24*24*bW-1]));
+convchan1 c_1_30 (.i_image(image), .i_kernel(kernels[30*5*5:31*5*5-1]), .o_out_fmap(xor_out[30*24*24*bW:31*24*24*bW-1]));
+convchan1 c_1_31 (.i_image(image), .i_kernel(kernels[31*5*5:32*5*5-1]), .o_out_fmap(xor_out[31*24*24*bW:32*24*24*bW-1]));
+convchan1 c_1_32 (.i_image(image), .i_kernel(kernels[32*5*5:33*5*5-1]), .o_out_fmap(xor_out[32*24*24*bW:33*24*24*bW-1]));
+convchan1 c_1_33 (.i_image(image), .i_kernel(kernels[33*5*5:34*5*5-1]), .o_out_fmap(xor_out[33*24*24*bW:34*24*24*bW-1]));
+convchan1 c_1_34 (.i_image(image), .i_kernel(kernels[34*5*5:35*5*5-1]), .o_out_fmap(xor_out[34*24*24*bW:35*24*24*bW-1]));
+convchan1 c_1_35 (.i_image(image), .i_kernel(kernels[35*5*5:36*5*5-1]), .o_out_fmap(xor_out[35*24*24*bW:36*24*24*bW-1]));
+convchan1 c_1_36 (.i_image(image), .i_kernel(kernels[36*5*5:37*5*5-1]), .o_out_fmap(xor_out[36*24*24*bW:37*24*24*bW-1]));
+convchan1 c_1_37 (.i_image(image), .i_kernel(kernels[37*5*5:38*5*5-1]), .o_out_fmap(xor_out[37*24*24*bW:38*24*24*bW-1]));
+convchan1 c_1_38 (.i_image(image), .i_kernel(kernels[38*5*5:39*5*5-1]), .o_out_fmap(xor_out[38*24*24*bW:39*24*24*bW-1]));
+convchan1 c_1_39 (.i_image(image), .i_kernel(kernels[39*5*5:40*5*5-1]), .o_out_fmap(xor_out[39*24*24*bW:40*24*24*bW-1]));
+convchan1 c_1_40 (.i_image(image), .i_kernel(kernels[40*5*5:41*5*5-1]), .o_out_fmap(xor_out[40*24*24*bW:41*24*24*bW-1]));
+convchan1 c_1_41 (.i_image(image), .i_kernel(kernels[41*5*5:42*5*5-1]), .o_out_fmap(xor_out[41*24*24*bW:42*24*24*bW-1]));
+convchan1 c_1_42 (.i_image(image), .i_kernel(kernels[42*5*5:43*5*5-1]), .o_out_fmap(xor_out[42*24*24*bW:43*24*24*bW-1]));
+convchan1 c_1_43 (.i_image(image), .i_kernel(kernels[43*5*5:44*5*5-1]), .o_out_fmap(xor_out[43*24*24*bW:44*24*24*bW-1]));
+convchan1 c_1_44 (.i_image(image), .i_kernel(kernels[44*5*5:45*5*5-1]), .o_out_fmap(xor_out[44*24*24*bW:45*24*24*bW-1]));
+convchan1 c_1_45 (.i_image(image), .i_kernel(kernels[45*5*5:46*5*5-1]), .o_out_fmap(xor_out[45*24*24*bW:46*24*24*bW-1]));
+convchan1 c_1_46 (.i_image(image), .i_kernel(kernels[46*5*5:47*5*5-1]), .o_out_fmap(xor_out[46*24*24*bW:47*24*24*bW-1]));
+convchan1 c_1_47 (.i_image(image), .i_kernel(kernels[47*5*5:48*5*5-1]), .o_out_fmap(xor_out[47*24*24*bW:48*24*24*bW-1]));
+convchan1 c_1_48 (.i_image(image), .i_kernel(kernels[48*5*5:49*5*5-1]), .o_out_fmap(xor_out[48*24*24*bW:49*24*24*bW-1]));
+convchan1 c_1_49 (.i_image(image), .i_kernel(kernels[49*5*5:50*5*5-1]), .o_out_fmap(xor_out[49*24*24*bW:50*24*24*bW-1]));
+convchan1 c_1_50 (.i_image(image), .i_kernel(kernels[50*5*5:51*5*5-1]), .o_out_fmap(xor_out[50*24*24*bW:51*24*24*bW-1]));
+convchan1 c_1_51 (.i_image(image), .i_kernel(kernels[51*5*5:52*5*5-1]), .o_out_fmap(xor_out[51*24*24*bW:52*24*24*bW-1]));
+convchan1 c_1_52 (.i_image(image), .i_kernel(kernels[52*5*5:53*5*5-1]), .o_out_fmap(xor_out[52*24*24*bW:53*24*24*bW-1]));
+convchan1 c_1_53 (.i_image(image), .i_kernel(kernels[53*5*5:54*5*5-1]), .o_out_fmap(xor_out[53*24*24*bW:54*24*24*bW-1]));
+convchan1 c_1_54 (.i_image(image), .i_kernel(kernels[54*5*5:55*5*5-1]), .o_out_fmap(xor_out[54*24*24*bW:55*24*24*bW-1]));
+convchan1 c_1_55 (.i_image(image), .i_kernel(kernels[55*5*5:56*5*5-1]), .o_out_fmap(xor_out[55*24*24*bW:56*24*24*bW-1]));
+convchan1 c_1_56 (.i_image(image), .i_kernel(kernels[56*5*5:57*5*5-1]), .o_out_fmap(xor_out[56*24*24*bW:57*24*24*bW-1]));
+convchan1 c_1_57 (.i_image(image), .i_kernel(kernels[57*5*5:58*5*5-1]), .o_out_fmap(xor_out[57*24*24*bW:58*24*24*bW-1]));
+convchan1 c_1_58 (.i_image(image), .i_kernel(kernels[58*5*5:59*5*5-1]), .o_out_fmap(xor_out[58*24*24*bW:59*24*24*bW-1]));
+convchan1 c_1_59 (.i_image(image), .i_kernel(kernels[59*5*5:60*5*5-1]), .o_out_fmap(xor_out[59*24*24*bW:60*24*24*bW-1]));
+convchan1 c_1_60 (.i_image(image), .i_kernel(kernels[60*5*5:61*5*5-1]), .o_out_fmap(xor_out[60*24*24*bW:61*24*24*bW-1]));
+convchan1 c_1_61 (.i_image(image), .i_kernel(kernels[61*5*5:62*5*5-1]), .o_out_fmap(xor_out[61*24*24*bW:62*24*24*bW-1]));
+convchan1 c_1_62 (.i_image(image), .i_kernel(kernels[62*5*5:63*5*5-1]), .o_out_fmap(xor_out[62*24*24*bW:63*24*24*bW-1]));
+convchan1 c_1_63 (.i_image(image), .i_kernel(kernels[63*5*5:64*5*5-1]), .o_out_fmap(xor_out[63*24*24*bW:64*24*24*bW-1]));
+convchan1 c_1_64 (.i_image(image), .i_kernel(kernels[64*5*5:65*5*5-1]), .o_out_fmap(xor_out[64*24*24*bW:65*24*24*bW-1]));
+convchan1 c_1_65 (.i_image(image), .i_kernel(kernels[65*5*5:66*5*5-1]), .o_out_fmap(xor_out[65*24*24*bW:66*24*24*bW-1]));
+convchan1 c_1_66 (.i_image(image), .i_kernel(kernels[66*5*5:67*5*5-1]), .o_out_fmap(xor_out[66*24*24*bW:67*24*24*bW-1]));
+convchan1 c_1_67 (.i_image(image), .i_kernel(kernels[67*5*5:68*5*5-1]), .o_out_fmap(xor_out[67*24*24*bW:68*24*24*bW-1]));
+convchan1 c_1_68 (.i_image(image), .i_kernel(kernels[68*5*5:69*5*5-1]), .o_out_fmap(xor_out[68*24*24*bW:69*24*24*bW-1]));
+convchan1 c_1_69 (.i_image(image), .i_kernel(kernels[69*5*5:70*5*5-1]), .o_out_fmap(xor_out[69*24*24*bW:70*24*24*bW-1]));
+convchan1 c_1_70 (.i_image(image), .i_kernel(kernels[70*5*5:71*5*5-1]), .o_out_fmap(xor_out[70*24*24*bW:71*24*24*bW-1]));
+convchan1 c_1_71 (.i_image(image), .i_kernel(kernels[71*5*5:72*5*5-1]), .o_out_fmap(xor_out[71*24*24*bW:72*24*24*bW-1]));
+convchan1 c_1_72 (.i_image(image), .i_kernel(kernels[72*5*5:73*5*5-1]), .o_out_fmap(xor_out[72*24*24*bW:73*24*24*bW-1]));
+convchan1 c_1_73 (.i_image(image), .i_kernel(kernels[73*5*5:74*5*5-1]), .o_out_fmap(xor_out[73*24*24*bW:74*24*24*bW-1]));
+convchan1 c_1_74 (.i_image(image), .i_kernel(kernels[74*5*5:75*5*5-1]), .o_out_fmap(xor_out[74*24*24*bW:75*24*24*bW-1]));
+convchan1 c_1_75 (.i_image(image), .i_kernel(kernels[75*5*5:76*5*5-1]), .o_out_fmap(xor_out[75*24*24*bW:76*24*24*bW-1]));
+convchan1 c_1_76 (.i_image(image), .i_kernel(kernels[76*5*5:77*5*5-1]), .o_out_fmap(xor_out[76*24*24*bW:77*24*24*bW-1]));
+convchan1 c_1_77 (.i_image(image), .i_kernel(kernels[77*5*5:78*5*5-1]), .o_out_fmap(xor_out[77*24*24*bW:78*24*24*bW-1]));
+convchan1 c_1_78 (.i_image(image), .i_kernel(kernels[78*5*5:79*5*5-1]), .o_out_fmap(xor_out[78*24*24*bW:79*24*24*bW-1]));
+convchan1 c_1_79 (.i_image(image), .i_kernel(kernels[79*5*5:80*5*5-1]), .o_out_fmap(xor_out[79*24*24*bW:80*24*24*bW-1]));
+convchan1 c_1_80 (.i_image(image), .i_kernel(kernels[80*5*5:81*5*5-1]), .o_out_fmap(xor_out[80*24*24*bW:81*24*24*bW-1]));
+convchan1 c_1_81 (.i_image(image), .i_kernel(kernels[81*5*5:82*5*5-1]), .o_out_fmap(xor_out[81*24*24*bW:82*24*24*bW-1]));
+convchan1 c_1_82 (.i_image(image), .i_kernel(kernels[82*5*5:83*5*5-1]), .o_out_fmap(xor_out[82*24*24*bW:83*24*24*bW-1]));
+convchan1 c_1_83 (.i_image(image), .i_kernel(kernels[83*5*5:84*5*5-1]), .o_out_fmap(xor_out[83*24*24*bW:84*24*24*bW-1]));
+convchan1 c_1_84 (.i_image(image), .i_kernel(kernels[84*5*5:85*5*5-1]), .o_out_fmap(xor_out[84*24*24*bW:85*24*24*bW-1]));
+convchan1 c_1_85 (.i_image(image), .i_kernel(kernels[85*5*5:86*5*5-1]), .o_out_fmap(xor_out[85*24*24*bW:86*24*24*bW-1]));
+convchan1 c_1_86 (.i_image(image), .i_kernel(kernels[86*5*5:87*5*5-1]), .o_out_fmap(xor_out[86*24*24*bW:87*24*24*bW-1]));
+convchan1 c_1_87 (.i_image(image), .i_kernel(kernels[87*5*5:88*5*5-1]), .o_out_fmap(xor_out[87*24*24*bW:88*24*24*bW-1]));
+convchan1 c_1_88 (.i_image(image), .i_kernel(kernels[88*5*5:89*5*5-1]), .o_out_fmap(xor_out[88*24*24*bW:89*24*24*bW-1]));
+convchan1 c_1_89 (.i_image(image), .i_kernel(kernels[89*5*5:90*5*5-1]), .o_out_fmap(xor_out[89*24*24*bW:90*24*24*bW-1]));
+
+endmodule
