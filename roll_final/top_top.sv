@@ -32,7 +32,10 @@ module top_top
   top dut ( .*);
 
 
-
+  initial begin 
+    $dumpfile("current_output.vcd" ); 
+    $dumpvars(0,top_top); 
+  end 
 
 
    //
@@ -40,18 +43,19 @@ module top_top
    // this is our failsafe end to catch run-away programs
    //
    initial begin
-      repeat(10000) @(posedge clk) ; // 10000 positive edges
+      repeat(100000) @(posedge clk) ; // 10000 positive edges
       $finish(1) ; // Note that the input is an error state
    end
 
 
 
    int i;
-   int img, f, val, x, y, cycles, filter, node_index, dummy;
+   int img, f, val, x, y,z, cycles, filter, node_index, dummy;
    logic [959:0] bin_val;
    string file_name;
+   logic [ 28:0] ld1, ld2, ld3;
 
-
+   logic [959:0] fan_in;
   //
   // Load memory while we reset the machine
   //
@@ -59,46 +63,114 @@ module top_top
 
     rst_n = 1'b0; //Clock through several times on reset
     for (cycles = 0; cycles < 5; cycles = cycles + 1) begin
-        #500 clk = 1'b0 ;
+        #499 clk = 1'b0 ;
 	#500 clk = 1'b1 ;
+        #1;
+        
     end
-              
+    rst_n = 1'b1;
 
+img=0 ;
 
-   for (img = 0; img < 1; img = img + 1) begin
- 	$sformat(file_name, "../inputs/image%0d.dat",img);
-     f = $fopen(file_name, "r");
-     for  (y = 0; y < 28; y = y + 1) begin
-       for (x = 0; x < 28; x = x + 1) begin
-         dummy=$fscanf(f, "%b ", val );
-         image[y][x] = val;
-       end
-     end
-	$sformat(file_name, "../inputs/conv1_kernel%0d.dat",img);
+$sformat(file_name, "../inputs/conv1_kernel%0d.dat",img);
      f = $fopen(file_name, "r");
      for (filter=0; filter<(18*5); filter = filter+1) begin
        for  (y = 0; y < 5; y = y + 1) begin
          for (x = 0; x < 5; x = x + 1) begin
            dummy=$fscanf(f, "%b ", val );
-           dut.kernel_mem1[filter/5][filter%5][y][x] = val;
+           image[0][y*5+x] = val;
          end
        end
+          
+          ld1 = (filter%5);
+          ld2 = filter/5;
+          image[5][0] = ld1[0];
+          image[5][1] = ld1[1];
+          image[5][2] = ld1[2];
+          image[4][0] = ld2[0];
+          image[4][1] = ld2[1];
+          image[4][2] = ld2[2];
+          image[4][3] = ld2[3];
+          image[4][4] = ld2[4];
+          kernel_layer = 2'd1;
+          #499 clk = 1'b0 ;
+	  #500 clk = 1'b1 ;
+          #1;
+
+
+
+       
      end
+
+
+
+    kernel_layer = 2'd0;
+
     $sformat(file_name, "../inputs/conv1_bias%0d.dat",img);
      f = $fopen(file_name, "r");
      for (filter=0; filter<18; filter = filter+1) begin
            dummy=$fscanf(f, "%d ", val );
            dut.offset_mem1[filter] = val;
 
+	ld2 = filter;
+           ld1 = val;
+           
+           image[3][0] = ld1[0];
+	image[3][1] = ld1[1];
+	image[3][2] = ld1[2];
+	image[3][3] = ld1[3];
+	image[3][4] = ld1[4];
+	image[3][5] = ld1[5];
+	image[3][6] = ld1[6];
+	image[3][7] = 0;
+	image[3][8] = 0;
+
+           image[4][0] = ld2[0];
+	image[4][1] = ld2[1];
+	image[4][2] = ld2[2];
+	image[4][3] = ld2[3];
+	image[4][4] = ld2[4];
+	image[4][5] = ld2[5];
+
+        offset_layer = 2'd1;
+          #499 clk = 1'b0 ;
+	  #500 clk = 1'b1 ;
+          #1;
+
      end
+offset_layer = 2'd0;
       $sformat(file_name, "../inputs/conv2_bias%0d.dat",img);
      f = $fopen(file_name, "r");
      for (filter=0; filter<60; filter = filter+1) begin
            dummy=$fscanf(f, "%d ", val );
-           dut.offset_mem2[filter] = val;
+           
+	ld2 = filter;
+           ld1 = val;
+           
+           image[3][0] = ld1[0];
+	image[3][1] = ld1[1];
+	image[3][2] = ld1[2];
+	image[3][3] = ld1[3];
+	image[3][4] = ld1[4];
+	image[3][5] = ld1[5];
+	image[3][6] = ld1[6];
+	image[3][7] = ld1[7];
+	image[3][8] = ld1[8];
+
+           image[7][0] = ld2[0];
+	image[7][1] = ld2[1];
+	image[7][2] = ld2[2];
+	image[7][3] = ld2[3];
+	image[7][4] = ld2[4];
+	image[7][5] = ld2[5];
+
+        offset_layer = 2'd2;
+          #499 clk = 1'b0 ;
+	  #500 clk = 1'b1 ;
+          #1;
 
      end
-
+offset_layer = 2'd0;
 
 	$sformat(file_name, "../inputs/conv2_kernel%0d.dat",img);
      f = $fopen(file_name, "r");
@@ -106,18 +178,65 @@ module top_top
        for  (y = 0; y < 5; y = y + 1) begin
          for (x = 0; x < 5; x = x + 1) begin
            dummy=$fscanf(f, "%b ", val );
-           dut.kernel_mem2[filter/18][filter%18][y][x] = val;
+           image[0][y*5+x] = val;
          end
        end
-     end
+          
+          ld2 = (filter%18);
+          ld1 = filter/18;
+          image[7][0] = ld1[0];
+          image[7][1] = ld1[1];
+          image[7][2] = ld1[2];
+          image[7][3] = ld1[3];
+          image[7][4] = ld1[4];
+          image[7][5] = ld1[5];
+          image[4][0] = ld2[0];
+          image[4][1] = ld2[1];
+          image[4][2] = ld2[2];
+          image[4][3] = ld2[3];
+          image[4][4] = ld2[4];
+          kernel_layer = 2'd2;
+          #499 clk = 1'b0 ;
+	  #500 clk = 1'b1 ;
+          #1;
 
+
+
+       
+     end
+kernel_layer = 2'd0;
 	$sformat(file_name, "../inputs/fc_weights%0d.dat",img);
     f = $fopen(file_name, "r");
    while (  2 == $fscanf(f, "%d %d", node_index, val ) )
    begin
-         dut.mult_weights_fc[node_index] = val;
+  
+         ld2 = node_index;
+           ld1 = val;
+           
+           image[3][0] = ld1[0];
+	image[3][1] = ld1[1];
+	image[3][2] = ld1[2];
+	image[3][3] = ld1[3];
+	image[3][4] = ld1[4];
+	image[3][5] = ld1[5];
+	image[3][6] = ld1[6];
+	image[3][7] = ld1[7];
+	image[3][8] = 0;
+
+           image[6][0] = ld2[0];
+	image[6][1] = ld2[1];
+	image[6][2] = ld2[2];
+	image[6][3] = ld2[3];
+
+        offset_layer = 2'd3;
+          #499 clk = 1'b0 ;
+	  #500 clk = 1'b1 ;
+          #1;
+
+
 
    end
+offset_layer = 2'd0;
    //f = $fopen("inputs/fc_input.dat", "r");
 
     //for(i = 0; i < 960; i ++) begin
@@ -139,8 +258,52 @@ module top_top
    begin
     for(i = 0; i < 960; i ++) begin
          dut.bin_weights_fc[node_index][i] = bin_val[i];
+        ld3 = node_index;
+           ld1 = i;
+           ld2 = bin_val[i];
+   
+        image[6][0] = ld3[0];
+	image[6][1] = ld3[1];
+	image[6][2] = ld3[2];
+	image[6][3] = ld3[3];
+        
+        image[8][0] = ld1[0];
+	image[8][1] = ld1[1];
+	image[8][2] = ld1[2];
+	image[8][3] = ld1[3];
+	image[8][4] = ld1[4];
+	image[8][5] = ld1[5];
+	image[8][6] = ld1[6];
+	image[8][7] = ld1[7];
+	image[8][8] = ld1[8];
+	image[8][8] = ld1[9];
+
+        image[3][0] = ld2[0];
+
+
+        kernel_layer = 2'd3;
+          #499 clk = 1'b0 ;
+	  #500 clk = 1'b1 ;
+          #1;
+
+
     end 
   end
+
+
+kernel_layer = 2'd0;
+$display("asdasd");
+// OK - Now start lookin at images
+   for (img = 0; img < 1; img = img + 1) begin
+ 	$sformat(file_name, "../inputs/image%0d.dat",img);
+     f = $fopen(file_name, "r");
+     for  (y = 0; y < 28; y = y + 1) begin
+       for (x = 0; x < 28; x = x + 1) begin
+         dummy=$fscanf(f, "%b ", val );
+         image[y][x] = val;
+       end
+     end
+	
     //$display("Showing Stuff now");
     //$display("%h\n",dut.f_kernel1);
     //$display(dut.conv_one_out[0]);
@@ -161,33 +324,29 @@ module top_top
     //f = $fopen({"../inputs/winner", img, ".dat"}, "r");
     //dummy=$fscanf(f, "%d", val);
     //golden_output = val;
-    
+    $display("aasfc");
 
     image_in_valid = 1'b1;
     #500 clk = 1'b0 ;
     #500 clk = 1'b1 ;
+    #500 clk = 1'b0 ;
     image_in_valid = 1'b0;
     class_out_ready = 1'b1;
 
         // Clock the input through the pipline stages
         for (cycles = 0; cycles < 500; cycles = cycles + 1) begin
-                #500 clk = 1'b0 ;
+                
                 #500 clk = 1'b1 ;
+                #500 clk = 1'b0 ;
 //	$display(dut.image_ready);
 //$display("Conv1 %d",dut.conv1_complete);
-         if (dut.conv1_complete) begin
- $display("Done with Conv1");
-end
+
+ 
+
         end
-    //image_in_valid = 1'b0;
-      // Check output
-      //assert(golden_output === class_out);
-	//$display(dut.image_mem);
-        //$display(dut.offset_mem1);
-        $display(dut.fc_out);
-	//$display(golden_output);
-        //$sformat(file_name, "../inputs/image%0d.dat",img);
-	//$display(file_name);
+
+  
+
 
 	$display("The following numbers should always be equal");
 	$sformat(file_name, "../inputs/fc_output%0d.dat",img);

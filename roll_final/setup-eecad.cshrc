@@ -24,3 +24,4 @@ setenv LM_LICENSE_FILE 27020@enlicense9.eas.asu.edu
 
 setenv SYNOPSYS /usr/local/synopsys/starrc_2015.06/linux64/syn/
 
+setenv SNPSLMD_LICENSE_FILE 27020@enlicense9.eas.asu.edu

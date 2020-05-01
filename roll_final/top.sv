@@ -32,7 +32,7 @@ module top
   assign kernel_input[4] = image[0][20:24];
 
   logic [8:0] number_input;
-  assign number_input = {image[3][0],image[3][1],image[3][2],image[3][3],image[3][4],image[3][5],image[3][6],image[3][7],image[3][8]};
+  assign number_input = {image[3][8],image[3][7],image[3][6],image[3][5],image[3][4],image[3][3],image[3][2],image[3][1],image[3][0]};
 
   logic kernel_mem1 [0:18-1][0:5-1][0:5-1][0:5-1];
   logic kernel_mem2 [0:60-1][0:18-1][0:5-1][0:5-1];
@@ -46,14 +46,14 @@ module top
   logic [0:3] kmem_addr10;
   logic [0:5] kmem_addr60;
   logic [0:9] kmem_addr960;
-  assign kmem_addr18 = {image[1][0], image[1][1], image[1][2], image[1][3], image[1][4]};
-  assign kmem_addr5 = {image[1][0], image[1][1], image[1][2]};
-  assign kmem_addr10 = {image[1][0], image[1][1], image[1][2], image[1][3]};
-  assign kmem_addr60 = {image[1][0], image[1][1], image[1][2], image[1][3], image[1][4], image[1][5]};
-  assign kmem_addr960 = {image[1][0], image[1][1], image[1][2], image[1][3], image[1][4], image[1][5], image[1][6], image[1][7], image[1][8], image[1][9]};
+  assign kmem_addr18 = {image[4][4], image[4][3], image[4][2], image[4][1], image[4][0]};
+  assign kmem_addr5 = {image[5][2], image[5][1], image[5][0]};
+  assign kmem_addr10 = {image[6][3], image[6][2], image[6][1], image[6][0]};
+  assign kmem_addr60 = {image[7][5], image[7][4], image[7][3], image[7][2], image[7][1], image[7][0]};
+  assign kmem_addr960 = {image[8][9], image[8][8], image[8][7], image[8][6], image[8][5], image[8][4], image[8][3], image[8][2], image[8][1], image[8][0]};
 
   always @(posedge clk)
-     if( kernel_layer == 2'd1 ) //conv1
+     if( kernel_layer == 2'd1 ) //conv1 
        kernel_mem1[kmem_addr18][kmem_addr5] <= kernel_input ;
 
   always @(posedge clk)
@@ -61,7 +61,7 @@ module top
        kernel_mem2[kmem_addr60][kmem_addr18] <= kernel_input ;
 
   always @(posedge clk)
-     if( kernel_layer == 2'd2 ) //fc
+     if( kernel_layer == 2'd3 ) //fc
        bin_weights_fc[kmem_addr10][kmem_addr960] <= number_input[0] ;
 
   always @(posedge clk)
@@ -81,7 +81,7 @@ module top
   logic fc_complete;
   logic conv1_out[0:11][0:11][0:18-1];
   logic conv2_out[0:3][0:3][0:60-1];
-  logic [4*4*60-1:0]conv2_flatten;
+  logic [0:4*4*60-1]conv2_flatten;
   logic [16:0] fc_out [0:9];
 
   conv1_engine c1 (.clk, .image(image_mem), .begin_conv(image_ready), .done_conv(conv1_complete), .kernels(kernel_mem1), .offset(offset_mem1), .out_fmap(conv1_out));
@@ -94,7 +94,7 @@ module top
   for(x = 0; x<4; x++) begin
    for(y = 0; y<4; y++) begin
     for(z = 0; z<60; z++) begin
-     assign conv2_flatten[z*4*4+y*4+x] = conv2_out[x][y][z];
+     assign conv2_flatten[z*4*4+y*4+x] = conv2_out[y][x][z];
     end
    end
   end

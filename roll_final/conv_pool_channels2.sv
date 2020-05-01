@@ -6,7 +6,7 @@ parameter bW=9)
 input logic image[0:chan_in-1][0:5][0:5],
 input logic kernels[0:chan_out-1][0:chan_in-1][0:5-1][0:5-1],
 input logic [bW-1:0] offset [0:chan_out-1],
-output logic  pixel [chan_out-1:0] );
+output logic  pixel [0:chan_out-1] );
 
 conv_pool_pixel450 c0 (.image, .kernels(kernels[0]), .offset(offset[0]), .pixel(pixel[0]));
 conv_pool_pixel450 c1 (.image, .kernels(kernels[1]), .offset(offset[1]), .pixel(pixel[1]));
