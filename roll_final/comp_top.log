@@ -1,0 +1,127 @@
+*** Using loader gcc instead of cc ...
+                         Chronologic VCS (TM)
+         Version K-2015.09_Full64 -- Fri May  1 00:42:51 2020
+               Copyright (c) 1991-2015 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+
+Warning-[LCA_FEATURES_ENABLED] Usage warning
+  LCA features enabled by '-lca' argument on the command line.  For more 
+  information regarding list of LCA features please refer to Chapter "LCA 
+  features" in the VCS/VCS-MX Release Notes
+
+Parsing design file 'top_fully_connected.sv'
+Parsing design file 'top_top.sv'
+Parsing design file 'conv_pool_channels.sv'
+Parsing design file 'top_popadd125.sv'
+Parsing design file 'conv_pool_pixel450.sv'
+Parsing design file 'fully_connected.sv'
+Parsing design file 'conv_pool_pixel125.sv'
+Parsing design file 'fastest_argmax10.sv'
+Parsing design file 'popadd450.sv'
+Parsing design file 'conv_pool_channels2.sv'
+Parsing design file 'conv1_engine.sv'
+Parsing design file 'top_conv_pool_pixel125.sv'
+Parsing design file 'conv2_engine.sv'
+Parsing design file 'top_conv1_engine.sv'
+Parsing design file 'top.sv'
+Parsing design file 'popadd125.sv'
+Parsing design file 'top_conv_pool_channels.sv'
+Parsing design file 'top_conv2_engine.sv'
+Top Level Modules:
+       top_top
+TimeScale is 1 ps / 1 ps
+module 'top_top' gets time unit '1 ps' from vcs command option
+module 'top_top' gets time precision '1 ps' from vcs command option
+module 'conv_pool_channels' gets time unit '1 ps' from vcs command option
+module 'conv_pool_channels' gets time precision '1 ps' from vcs command option
+module 'conv_pool_pixel450' gets time unit '1 ps' from vcs command option
+module 'conv_pool_pixel450' gets time precision '1 ps' from vcs command option
+module 'fully_connected' gets time unit '1 ps' from vcs command option
+module 'fully_connected' gets time precision '1 ps' from vcs command option
+module 'conv_pool_pixel125' gets time unit '1 ps' from vcs command option
+module 'conv_pool_pixel125' gets time precision '1 ps' from vcs command option
+module 'fastest_argmax10' gets time unit '1 ps' from vcs command option
+module 'fastest_argmax10' gets time precision '1 ps' from vcs command option
+module 'popadd450' gets time unit '1 ps' from vcs command option
+module 'popadd450' gets time precision '1 ps' from vcs command option
+module 'conv_pool_channels2' gets time unit '1 ps' from vcs command option
+module 'conv_pool_channels2' gets time precision '1 ps' from vcs command option
+module 'conv1_engine' gets time unit '1 ps' from vcs command option
+module 'conv1_engine' gets time precision '1 ps' from vcs command option
+module 'conv2_engine' gets time unit '1 ps' from vcs command option
+module 'conv2_engine' gets time precision '1 ps' from vcs command option
+module 'top' gets time unit '1 ps' from vcs command option
+module 'top' gets time precision '1 ps' from vcs command option
+module 'popadd125' gets time unit '1 ps' from vcs command option
+module 'popadd125' gets time precision '1 ps' from vcs command option
+module 'top_0000' gets time unit '1 ps' from vcs command option
+module 'top_0000' gets time precision '1 ps' from vcs command option
+module 'conv1_engine_0000' gets time unit '1 ps' from vcs command option
+module 'conv1_engine_0000' gets time precision '1 ps' from vcs command option
+module 'popadd125_0000' gets time unit '1 ps' from vcs command option
+module 'popadd125_0000' gets time precision '1 ps' from vcs command option
+module 'conv2_engine_0000' gets time unit '1 ps' from vcs command option
+module 'conv2_engine_0000' gets time precision '1 ps' from vcs command option
+module 'popadd450_0000' gets time unit '1 ps' from vcs command option
+module 'popadd450_0000' gets time precision '1 ps' from vcs command option
+
+Lint-[UV] Unused variable
+top_top.sv, 19
+"kernel_in_valid"
+  The variable in above verilog source has never been used.
+  
+
+
+Lint-[UV] Unused variable
+top_top.sv, 21
+"kernel_offset"
+  The variable in above verilog source has never been used.
+  
+
+
+Lint-[UV] Unused variable
+top_top.sv, 22
+"kernel_addr"
+  The variable in above verilog source has never been used.
+  
+
+
+Lint-[UV] Unused variable
+top_top.sv, 30
+"golden_output"
+  The variable in above verilog source has never been used.
+  
+
+
+Lint-[UV] Unused variable
+top_top.sv, 58
+"fan_in"
+  The variable in above verilog source has never been used.
+  
+
+Starting vcs inline pass...
+11 modules and 0 UDP read.
+	However, due to incremental compilation, only 3 modules need to be compiled.
+recompiling module top_top because:
+	Assertion file changed or assertion compile time options changed.
+Generating code for _VCSgd_kdWLs
+recompiling module conv2_engine because:
+	This module or some inlined child module(s) has/have been modified.
+Generating code for _VCSgd_b9Nxj
+recompiling module top because:
+	This module or some inlined child module(s) has/have been modified.
+Generating code for _VCSgd_bCQEN
+All of 3 modules done
+make[1]: Entering directory `/afs/asu.edu/users/j/m/e/jmendio3/nchd/598-Project/roll_final/csrc'
+make[1]: Leaving directory `/afs/asu.edu/users/j/m/e/jmendio3/nchd/598-Project/roll_final/csrc'
+make[1]: Entering directory `/afs/asu.edu/users/j/m/e/jmendio3/nchd/598-Project/roll_final/csrc'
+if [ -x ../simv_top ]; then chmod -x ../simv_top; fi
+gcc  -o ../simv_top  -rdynamic    -Wl,-whole-archive    /usr/local/synopsys/vcs_2015.09/linux64/lib/libvcsucli.so -Wl,-no-whole-archive   objs/rh1Rm_d.o objs/Wby01_d.o objs/kdWLs_d.o objs/axrid_d.o objs/bCQEN_d.o objs/j5MKC_d.o objs/reYIK_d.o objs/HPPym_d.o amcQwB.o objs/amcQw_d.o objs/z40MJ_d.o objs/b9Nxj_d.o objs/SeF8F_d.o    SIM_l.o       rmapats_mop.o rmapats.o rmar.o  rmar_llvm_0_1.o rmar_llvm_0_0.o        /usr/local/synopsys/vcs_2015.09/linux64/lib/libzerosoft_rt_stubs.so /usr/local/synopsys/vcs_2015.09/linux64/lib/libvirsim.so /usr/local/synopsys/vcs_2015.09/linux64/lib/liberrorinf.so /usr/local/synopsys/vcs_2015.09/linux64/lib/libsnpsmalloc.so     /usr/local/synopsys/vcs_2015.09/linux64/lib/libvcsnew.so /usr/local/synopsys/vcs_2015.09/linux64/lib/libsimprofile.so /usr/local/synopsys/vcs_2015.09/linux64/lib/libuclinative.so            /usr/local/synopsys/vcs_2015.09/linux64/lib/vcs_save_restore_new.o -ldl -lm  -lc -lpthread -ldl 
+../simv_top up to date
+make[1]: Leaving directory `/afs/asu.edu/users/j/m/e/jmendio3/nchd/598-Project/roll_final/csrc'
+CPU time: 8.958 seconds to compile + .357 seconds to elab + .362 seconds to link

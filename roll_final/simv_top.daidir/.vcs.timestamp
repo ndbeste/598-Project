@@ -1,0 +1,188 @@
+0 
+74
++cli
++cli+1
++itf+/usr/local/synopsys/vcs_2015.09/linux64/lib/vcsdp.tab
++libext+.v
++lint=CAWM-L
++lint=ERASM-L
++lint=FIAAS
++lint=IRIMW
++lint=PCWM
++lint=PCWM
++lint=UV
++memcbk
++noportcoerce
++v2k
++vcs+lic+wait
++vcs+lic+wait
++vcs+saif_libcell
++vcsd
++vpi
++warn=all
+-Mamsrun=
+-Masflags=
+-Mcc=gcc
+-Mcfl= -pipe -O -I/usr/local/synopsys/vcs_2015.09/include
+-Mcplusplus=g++
+-Mcrt0=
+-Mcrtn=
+-Mcsrc=
+-Mexternalobj=
+-Mldflags= -rdynamic
+-Mloader=gcc
+-Mobjects= /usr/local/synopsys/vcs_2015.09/linux64/lib/libvirsim.so /usr/local/synopsys/vcs_2015.09/linux64/lib/liberrorinf.so /usr/local/synopsys/vcs_2015.09/linux64/lib/libsnpsmalloc.so
+-Mout=simv_top
+-Msaverestoreobj=/usr/local/synopsys/vcs_2015.09/linux64/lib/vcs_save_restore_new.o
+-Msyslibs=-ldl -lm
+-Mvcsaceobjs=
+-Mxcflags= -pipe -I/usr/local/synopsys/vcs_2015.09/include
+-Xcbug=0x1
+-Xcbug=0x1
+-Xnotice
+-Xpiyushb1=0x80
+-Xpiyushb1=0x80
+-debug=1
+-full64
+-gen_obj
+-lca
+-o simv_top
+-ova_lint
+-ova_lint_magellan
+-parallel+saif=1
+-pp_used
+-sverilog
+-timescale=1ps/1ps
+-top
+/usr/local/synopsys/vcs_2015.09/linux64/bin/vcs1
+conv1_engine.sv
+conv2_engine.sv
+conv_pool_channels.sv
+conv_pool_channels2.sv
+conv_pool_pixel125.sv
+conv_pool_pixel450.sv
+fastest_argmax10.sv
+fully_connected.sv
+popadd125.sv
+popadd450.sv
+top.sv
+top_conv1_engine.sv
+top_conv2_engine.sv
+top_conv_pool_channels.sv
+top_conv_pool_pixel125.sv
+top_fully_connected.sv
+top_popadd125.sv
+top_top
+top_top.sv
+84
+sysc_uni_pwd=/afs/asu.edu/users/j/m/e/jmendio3/nchd/598-Project/roll_final
+XTERM_VERSION=X.Org 7.6.0(295)
+XTERM_SHELL=/bin/tcsh
+XTERM_LOCALE=C
+XMODIFIERS=@im=ibus
+XDG_SESSION_TYPE=x11
+XDG_SESSION_ID=3683
+XDG_SESSION_CLASS=user
+XDG_RUNTIME_DIR=/run/user/1357179
+XDG_MENU_PREFIX=gnome-
+XDG_CURRENT_DESKTOP=GNOME
+XAUTHORITY=/afs/asu.edu/users/j/m/e/jmendio3/.Xauthority
+VNC_SYSTEMXORG=1
+VNCDESKTOP=x11
+VMR_MODE_FLAG=64
+VENDOR=unknown
+VCS_MODE_FLAG=64
+VCS_LCAMSG_PRINT_OFF=1
+VCS_HOME=/usr/local/synopsys/vcs_2015.09/
+VCS_DEPTH=0
+VCS_ARG_ADDED_FOR_TMP=1
+VCS_ARCH=linux64
+UNAME=/bin/uname
+TOOL_HOME=/usr/local/synopsys/vcs_2015.09/linux64
+SYNOPSYS=/usr/local/synopsys/starrc_2015.06/linux64/syn/
+STROOT=/usr/local/synopsys/sentaurus_2015.06
+SSH_TTY=/dev/pts/0
+SSH_CONNECTION=68.104.196.245 50998 129.219.27.119 22
+SSH_CLIENT=68.104.196.245 50998 22
+SNPS_VCS_DIAG_INTERNAL_OPTS=-diag timescale 
+SNPSLMD_LICENSE_FILE=27020@enlicense9.eas.asu.edu
+SIM_ENGINE=synopsys
+SFLM_SERVERS=enlicense7.eas.asu.edu
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/24907,unix/unix:/tmp/.ICE-unix/24907
+SCRNAME=vcs
+SCRIPT_NAME=vcs
+REMOTEHOST=ip68-104-196-245.ph.ph.cox.net
+QT_PLUGIN_PATH=/usr/lib64/kde4/plugins:/usr/lib/kde4/plugins
+QT_IM_MODULE=ibus
+QT_GRAPHICSSYSTEM_CHECKED=1
+QTLIB=/usr/lib64/qt-3.3/lib
+QTINC=/usr/lib64/qt-3.3/include
+QTDIR=/usr/lib64/qt-3.3
+PULSE_SERVER=/run/user/1357179/session-5165e4f19cab4185/pulse/native
+PERL_MM_OPT=INSTALL_BASE=/afs/asu.edu/users/j/m/e/jmendio3/perl5
+PERL_MB_OPT=--install_base /afs/asu.edu/users/j/m/e/jmendio3/perl5
+PERL_LOCAL_LIB_ROOT=/afs/asu.edu/users/j/m/e/jmendio3/perl5
+PERL_HOMEDIR=1
+PERL5LIB=/usr/local/GENESIS2/genesis2-master/gui/configs/install/perlfiles:/usr/local/GENESIS2/genesis2-master/PerlLibs/ExtrasForOldPerlDistributions
+OVA_UUM=0
+OSTYPE=linux
+MMSIM=/usr/local/cadence/MMSIM141
+MGLS_LICENSE_FILE=1717@enlicense4.eas.asu.edu
+MFLAGS=
+MAKELEVEL=1
+MAKEFLAGS=
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+LC_ALL=C
+KRB5CCNAME=KEYRING:persistent:1357179
+KDEDIRS=/usr
+IMSETTINGS_MODULE=none
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+IC=/usr/local/cadence/IC615
+HPEESOF_DIR=/usr/local/agilent/ADS2016_01
+HOSTTYPE=x86_64-linux
+GROUP=jmendio3
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+GJS_DEBUG_OUTPUT=stderr
+GIO_LAUNCHED_DESKTOP_FILE_PID=24986
+GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/org.gnome.Shell.desktop
+GENESIS_HOME=/usr/local/GENESIS2/genesis2-master
+DISPLAYNUM=2
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1357179/session-5165e4f19cab4185/bus
+CDS_Netlisting_Mode=Analog
+CDS_LOAD_ENV=addCWD
+CDS_LIC_FILE=5280@enlicense4.eas.asu.edu
+CDS_INST_DIR=/usr/local/cadence
+CDS_IBM=/usr/local/cadence/IC615
+CDS=/usr/local/cadence
+CDK_DIR=/usr/local/cadence/NCSU/ncsu-cdk-1.6.0.beta
+ANSOFTHOME=/usr/local/AnsysEM/AnsysEM15.0
+AGILEESOFD_LICENSE_FILE=28000@enlicense7.eas.asu.edu
+ADS_DIR=/usr/local/agilent/ADS2016_01
+0
+19
+1588296382 top_conv2_engine.sv
+1588296382 top_conv_pool_channels.sv
+1588296382 popadd125.sv
+1588318964 top.sv
+1588296382 top_conv1_engine.sv
+1588312553 conv2_engine.sv
+1588296382 top_conv_pool_pixel125.sv
+1588310869 conv1_engine.sv
+1588302184 conv_pool_channels2.sv
+1588296382 popadd450.sv
+1588296382 fastest_argmax10.sv
+1588302718 conv_pool_pixel125.sv
+1588296382 fully_connected.sv
+1588315113 conv_pool_pixel450.sv
+1588296382 top_popadd125.sv
+1588302171 conv_pool_channels.sv
+1588318863 top_top.sv
+1588296382 top_fully_connected.sv
+1440562444 /usr/local/synopsys/vcs_2015.09/linux64/lib/vcsdp.tab
+4
+0 
+1440563255 /usr/local/synopsys/vcs_2015.09/linux64/lib/libvirsim.so
+1440562843 /usr/local/synopsys/vcs_2015.09/linux64/lib/liberrorinf.so
+1440562824 /usr/local/synopsys/vcs_2015.09/linux64/lib/libsnpsmalloc.so
+1588318986 simv_top.daidir

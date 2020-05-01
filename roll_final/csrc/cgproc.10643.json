@@ -1,0 +1,57 @@
+{
+    "Modules": {
+        "...MASTER...": {},
+        "fully_connected": {},
+        "std": {},
+        "conv_pool_pixel125": {},
+        "top_0000": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "conv_pool_channels2": {},
+        "top_top": {
+            "Compiled": "Yes",
+            "Compiled Times": 36
+        },
+        "conv_pool_pixel450": {},
+        "conv_pool_channels": {},
+        "conv1_engine_0000": {},
+        "fastest_argmax10": {},
+        "conv2_engine_0000": {
+            "Compiled": "Yes",
+            "Compiled Times": 2
+        }
+    },
+    "CompUnits": {
+        "amcQw_d": {
+            "checksum": 4294967295,
+            "mod": "...MASTER...",
+            "out": "objs/amcQw_d.o",
+            "mode": 4,
+            "bytes": 7113
+        },
+        "kdWLs_d": {
+            "checksum": 4294967295,
+            "mod": "top_top",
+            "out": "objs/kdWLs_d.o",
+            "mode": 4,
+            "bytes": 59015
+        },
+        "b9Nxj_d": {
+            "checksum": 4294967295,
+            "mod": "conv2_engine_0000",
+            "out": "objs/b9Nxj_d.o",
+            "mode": 4,
+            "bytes": 475570
+        },
+        "bCQEN_d": {
+            "checksum": 4294967295,
+            "mod": "top_0000",
+            "out": "objs/bCQEN_d.o",
+            "mode": 4,
+            "bytes": 3302874
+        }
+    },
+    "reusePaths": {},
+    "ObjArchives": []
+}

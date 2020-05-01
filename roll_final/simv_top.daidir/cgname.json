@@ -1,0 +1,62 @@
+{
+    "fully_connected": [
+        "fully_connected",
+        "rh1Rm",
+        "module"
+    ],
+    "std": [
+        "std",
+        "reYIK",
+        "module"
+    ],
+    "top_0000": [
+        "top_0000",
+        "bCQEN",
+        "module"
+    ],
+    "top_top": [
+        "top_top",
+        "kdWLs",
+        "module"
+    ],
+    "conv_pool_channels2": [
+        "conv_pool_channels2",
+        "SeF8F",
+        "module"
+    ],
+    "conv_pool_pixel125": [
+        "conv_pool_pixel125",
+        "z40MJ",
+        "module"
+    ],
+    "conv_pool_pixel450": [
+        "conv_pool_pixel450",
+        "axrid",
+        "module"
+    ],
+    "conv_pool_channels": [
+        "conv_pool_channels",
+        "Wby01",
+        "module"
+    ],
+    "conv1_engine_0000": [
+        "conv1_engine_0000",
+        "HPPym",
+        "module"
+    ],
+    "fastest_argmax10": [
+        "fastest_argmax10",
+        "j5MKC",
+        "module"
+    ],
+    "conv2_engine_0000": [
+        "conv2_engine_0000",
+        "b9Nxj",
+        "module"
+    ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
+        "module"
+    ]
+}

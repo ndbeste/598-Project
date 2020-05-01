@@ -15,13 +15,13 @@ read_lib "/afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5
 set link_path {* asap7sc7p5t_22b_AO_RVT_TT_170906 asap7sc7p5t_22b_INVBUF_RVT_TT_170906 asap7sc7p5t_22b_OA_RVT_TT_170906 asap7sc7p5t_22b_SEQ_RVT_TT_170906 asap7sc7p5t_22b_SIMPLE_RVT_TT_170906}
 
 # Post-Encounter: use *.v output from Encounter
-read_verilog -hdl_compiler {dp_sqrt_APR.v}
+read_verilog -hdl_compiler {top.sv}
 link_design $MYDESIGN
 set power_enable_analysis true
 
 # Post-Encounter: use *.spef generated from Encounter
-read_parasitics "./dp_sqrt.spef"
-read_sdc "./dp_sqrt_1000.sdc"
+//read_parasitics "./dp_sqrt.spef"
+//read_sdc "./dp_sqrt_1000.sdc"
 read_vcd "./current_output.vcd" -strip_path top_top/dut
 # In your testbench simulation, the top-level module that you designed is instantiated
 # In the vcd related line above,
