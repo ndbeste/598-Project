@@ -1,0 +1,33 @@
+# Version:1.0 MMMC View Definition File
+# Do Not Remove Above Line
+
+create_library_set -name libset_slow\
+   -timing\
+    [list /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_INVBUF_RVT_TT.lib /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_AO_RVT_TT.lib /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_OA_RVT_TT.lib /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_SEQ_RVT_TT.lib /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_SIMPLE_RVT_TT.lib]
+
+   
+create_library_set -name libset_fast\
+   -timing\
+    [list /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_INVBUF_RVT_TT.lib /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_AO_RVT_TT.lib /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_OA_RVT_TT.lib /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_SEQ_RVT_TT.lib /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/lib/asap7sc7p5t_24_SIMPLE_RVT_TT.lib]
+
+create_rc_corner -name RC_corner_25\
+   -T 25\
+   -qx_tech_file /afs/asu.edu/class/e/e/e/eee525b/asap7libs/asap7libs_24/qrc/qrcTechFile_typ03_scaled4xV06
+
+create_delay_corner -name delayCorner_slow\
+   -library_set libset_slow\
+   -rc_corner RC_corner_25
+
+create_delay_corner -name delayCorner_fast\
+   -library_set libset_fast\
+   -rc_corner RC_corner_25
+
+# Edit this with your sdc file generated after synthesis
+create_constraint_mode -name common\
+   -sdc_files\
+    [list /afs/asu.edu/users/n/b/e/nbeste/asap7_rundir/1/top.1200.syn.sdc /afs/asu.edu/users/n/b/e/nbeste/asap7_rundir/1/fully_connected.1200.syn.sdc /afs/asu.edu/users/n/b/e/nbeste/asap7_rundir/1/fastest_argmax10.1200.syn.sdc /afs/asu.edu/users/n/b/e/nbeste/asap7_rundir/1/conv_pool_pixel125.1000.syn.sdc /afs/asu.edu/users/n/b/e/nbeste/asap7_rundir/1/conv_pool_channels.1000.syn.sdc /afs/asu.edu/users/n/b/e/nbeste/asap7_rundir/1/conv2_engine.1000.syn.sdc /afs/asu.edu/users/n/b/e/nbeste/asap7_rundir/1/conv1_engine.1000.syn.sdc]
+
+create_analysis_view -name default_setup_view -constraint_mode common -delay_corner delayCorner_slow
+create_analysis_view -name default_hold_view -constraint_mode common -delay_corner delayCorner_fast
+
+set_analysis_view -setup [list default_setup_view ] -hold [list default_hold_view ]
